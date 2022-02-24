@@ -1,0 +1,10 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var Item_1 = require("./Item");
+var item1 = new Item_1.Item(1, "Dress Shirt", 21.99);
+var item2 = new Item_1.Item(2, "SweatPants", 15.99);
+var item3 = new Item_1.Item(3, "Jeans", 34.99);
+item1.showItemInfo();
+item2.showItemInfo();
+item3.showItemInfo();
+console.log(item3.Price);
