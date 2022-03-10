@@ -104,11 +104,12 @@
     </div>
     
     <div class="center">
-      <button class="btn btn-primary submit-button" type="submit" [disabled]="!form.valid">
+      <button class="btn btn-primary submit-button" type="submit" [disabled]="!form.valid" (click)="onSubmit(form.form.value)">
         Sign Up
       </button>
     </div>
     
   </form>
 </div>
-<h4> {{form.value | json}} </h4>
+<p> {{display}} </p>
+<!-- <h4> {{form.value | json}} </h4> -->
