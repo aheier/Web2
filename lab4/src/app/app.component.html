@@ -1,0 +1,114 @@
+<div class="center-container">
+
+  <h1 class="center"> Registration Form </h1>
+
+  <form #form="ngForm" ngModel >
+
+    <div class="form-floating mb-3">
+      <input type="text" ngModel name="firstName" #firstName="ngModel" class="form-control" 
+      placeholder="First Name" required pattern="[a-zA-Z]+" minlength="2">
+      <label>First Name</label>
+    </div>
+    <div class="alert alert-danger p-1" *ngIf="firstName.touched && !firstName.valid">
+      <div *ngIf="firstName.errors?.['required']">
+        First Name is required
+      </div>
+      <div *ngIf="firstName.errors?.['pattern']">
+        First Name must be letters only
+      </div>
+      <div *ngIf="firstName.errors?.['minlength']">
+        First Name must be 2 or more characters
+      </div>
+    </div>
+    
+    <div class="form-floating mb-3">
+      <input type="text" ngModel name="lastName" #lastName="ngModel" class="form-control" 
+      placeholder="Last Name" required pattern="[a-zA-Z]+" minlength="2">
+      <label>Last Name</label>
+    </div>
+    <div class="alert alert-danger p-1" *ngIf="lastName.touched && !lastName.valid">
+      <div *ngIf="lastName.errors?.['required']">
+        Last Name is required
+      </div>
+      <div *ngIf="lastName.errors?.['pattern']">
+        last Name must be letters only
+      </div>
+      <div *ngIf="lastName.errors?.['minlength']">
+        Last Name must be 2 or more characters
+      </div>
+    </div>
+    
+    <div class="form-floating mb-3">
+      <input type="email" ngModel name="email" #email="ngModel" class="form-control" 
+      placeholder="Email address" required pattern="[a-z0-9]+@[a-z]+\.[a-z]{2,3}">
+      <label>Email address</label>
+    </div>
+    <div class="alert alert-danger p-1" *ngIf="email.touched && !email.valid">
+      <div *ngIf="email.errors?.['required']">
+        Email is required
+      </div>
+      <div *ngIf="email.errors?.['pattern']">
+        Email address not in valid format
+      </div>
+    </div>
+    
+    <div class="form-floating mb-3">
+      <input type="password" ngModel name="pass" #pass="ngModel" class="form-control" 
+      placeholder="Password" required minlength="8">
+      <label>Password</label>
+    </div>
+    <div class="alert alert-danger p-1" *ngIf="pass.touched && !pass.valid">
+      <div *ngIf="pass.errors?.['required']">
+        Password is required
+      </div>
+      <div *ngIf="pass.errors?.['minlength']">
+        Password must be minimum 8 characters
+      </div>
+    </div>
+    
+    <div class="form-floating mb-3">
+      <input type="tel" ngModel name="phone" #phone="ngModel" class="form-control" 
+      placeholder="Phone no" pattern="[0-9]{3}[\s\-]?[0-9]{3}[\s\-]?[0-9]{4}$" appPhone>
+      <label>Phone no </label>
+    </div>
+    <div class="alert alert-danger p-1" *ngIf="phone.touched && !phone.valid">
+      <div *ngIf="phone.errors?.['pattern']">
+        Phone number not in valid format
+      </div>
+    </div>
+
+
+    <select class="form-select form-select-md" name="department" ngModel #department="ngModel">
+      <option value="" selected disabled>Choose your department</option>
+      <option *ngFor="let department of departments" value="{{department}}">{{department}}</option>
+    </select>
+    <br>
+    <div class="form-check form-check-inline btn btn-primary px-4 mx-0">
+      <input class="form-check-input" type="radio" name="gender" value="male" ngModel #male="ngModel">
+      <label class="form-check-label" for="inlineRadio1">Male</label>
+    </div>
+    <div class="form-check form-check-inline btn btn-primary px-4 mx-0">
+      <input class="form-check-input" type="radio" name="gender" value="female" ngModel #female="ngModel">
+      <label class="form-check-label" for="inlineRadio2">Female</label>
+    </div>
+    <div class="form-check form-check-inline btn btn-primary px-4 mx-0">
+      <input class="form-check-input" type="radio" name="gender" value="other" ngModel #other="ngModel">
+      <label class="form-check-label" for="inlineRadio3">Other</label>
+    </div>
+
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" name="isSubscribed" ngModel #isSubscribed="ngModel">
+      <label class="form-check-label" for="flexCheckChecked">
+        Subscribe to our newsletter
+      </label>
+    </div>
+    
+    <div class="center">
+      <button class="btn btn-primary submit-button" type="submit" [disabled]="!form.valid">
+        Sign Up
+      </button>
+    </div>
+    
+  </form>
+</div>
+<h4> {{form.value | json}} </h4>

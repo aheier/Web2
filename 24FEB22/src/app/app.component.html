@@ -1,0 +1,29 @@
+<form #f="ngForm" (ngSubmit)="onSubmit(f.value)">
+  <div class="form-group">
+    <label for="firstName"> First Name </label>
+    <input required minlength="3" pattern="[a-zA-Z]+"
+      ngModel name="firstName" #firstName="ngModel"
+      (change)="log(firstName)"
+      id="firstName" type="text" class="form-control">
+  </div>
+  <div class="alert alert-danger" *ngIf="firstName.touched && firstName.invalid">
+    <div *ngIf="firstName.errors?.['required'] && firstName.touched"> 
+      First Name is required 
+    </div>
+    <div  *ngIf="firstName.errors?.['pattern']"> 
+      First Name has an invalid character(s). 
+    </div>
+    <div *ngIf="firstName.errors?.['minlength']"> 
+      First Name must be at least 3 characters.
+    </div>
+
+  </div>
+  <div class="form-group">
+    <label for="comment"> Comment </label>
+    <textarea ngModel name="comment" id="comment" rows="10" cols="30" class="form-control"></textarea>
+  <button class="btn btn-primary" [disabled]="!firstName.valid">
+    Submit
+  </button>
+</div>
+</form>
+<p> {{submit | json}}</p>
