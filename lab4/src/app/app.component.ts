@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { FormGroup, NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -18,8 +18,9 @@ export class AppComponent {
     "Marketing"
   ];
 
-  onSubmit(form:any){
-    console.log(form)
+  onSubmit(fg:FormGroup){
+    console.log(fg.value)
+    let form = fg.value
     this.display = "{";
     this.display += "\n\t\"firstName\": " + form.firstName
     this.display += ",\n\t\"lastName\": " + form.lastName
