@@ -1,2 +1,40 @@
 /* You can add global styles to this file, and also import other style files */
-@import "~bootstrap/dist/css/bootstrap.css"
+/* @import "~bootstrap/dist/css/bootstrap.css" */
+/* 
+black #171A21
+grey #617073
+samon #FF715B
+white #FFFFFF
+light grey #E2DADB
+*/
+.cust-bg-black{
+    background-color: #171A21 !important;
+}
+.cust-bg-lightgrey{
+    background-color: #E2DADB !important;
+}
+.cust-bg-grey{
+    background-color: #617073 !important;
+}
+.cust-bg-white{
+    background-color: #FFFFFF !important;
+}
+.cust-bg-samon{
+    background-color: #FF715B !important;
+}
+
+.cust-col-black{
+    color: #171A21 !important;
+}
+.cust-col-lightgrey{
+    color: #E2DADB !important;
+}
+.cust-col-grey{
+    color: #617073 !important;
+}
+.cust-col-white{
+    color: #FFFFFF !important;
+}
+.cust-col-samon{
+    color: #FF715B !important;
+}
