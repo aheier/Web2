@@ -29,10 +29,8 @@ export class Cart {
         if(this.cartProducts.length==0) return;
 
         this.cartProducts.forEach( (product, index) => {
-            console.log("loop")
             if(removeProduct.getId() == product.getId()){
                 let removed = this.cartProducts?.splice(index, 1)
-                console.log("Splice " + removed)
             }
         });
     }

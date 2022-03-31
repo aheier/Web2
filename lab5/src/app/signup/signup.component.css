@@ -1,0 +1,13 @@
+.center-container{
+    width: 60%;
+    margin: auto;
+}
+.submit-button{
+    width:40%;
+}
+.center{
+    text-align: center;
+}
+.radio-btn{
+    background-color: purple;
+}

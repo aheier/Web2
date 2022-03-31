@@ -1,1 +1,54 @@
-<p>cart works!</p>
+<section style="background-color: #eee; min-height: 280px;">
+    <div class="container h-100 py-5">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-10">
+  
+          <div class="d-flex justify-content-between align-items-center mb-4" *ngIf="this.cartItems.length != 0">
+            <h3 class="fw-normal mb-0 text-black">
+              Your Cart ({{this.cartItems.length}} Item{{this.cartItems.length >1 ? "s)":")"}}</h3>
+          </div>
+          
+          <div class="mb-4 text-center" *ngIf="this.cartItems.length == 0">
+            <h3 class="fw-normal mb-0 text-black">
+              No Items in cart. Head back to <a routerLink="/product">product</a> page.</h3>
+          </div>
+  
+          <div class="card rounded-3 mb-4" *ngFor="let item of cartItems">
+            <div class="card-body p-4">
+              <div class="row d-flex justify-content-between align-items-center">
+                <div class="col-3">
+                  <img [src]="item.getImagePath()"
+                    class="img-fluid rounded-3 cart-img" alt="Cotton T-shirt">
+                </div>
+                <div class="col-3">
+                  <p class="lead fw-normal mb-2">{{item.getName()}}</p>
+                  <p>{{item.getDescription()}}</p>
+                </div>
+
+                <div class="col-3">
+                  <p> Price: {{item.getPrice() | currency}}</p>
+                </div>
+                <div class="col-3 text-end">
+                  <button class="btn btn-danger" (click)="removeItem(item)">Remove Item </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card" *ngIf="this.cartItems.length != 0">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-8">
+                  <button type="button" class="btn btn-primary btn-block btn-lg">Proceed to Chekout</button>
+                </div>
+                <div class="col-4">
+                  <h6 class="pt-3">Total Price: {{getTotalPrice() | currency}}</h6>
+                </div>
+              </div>
+            </div>
+          </div>
+  
+        </div>
+      </div>
+    </div>
+  </section>

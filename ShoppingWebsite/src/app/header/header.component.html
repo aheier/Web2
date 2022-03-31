@@ -18,10 +18,11 @@
             <a class="nav-link" routerLink="/checkout" routerLinkActive="actives">Checkout</a>
           </li>
         </ul>
-        <form class="d-flex">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
+        <div class="d-flex">
+          <input class="form-control me-2" ngModel type="search" placeholder="Search" 
+          aria-label="Search" #search (keydown.enter)="onSearch(search)">
+          <button class="btn btn-outline-success" type="button" (click)="onSearch(search)">Search</button>
+        </div>
       </div>
     </div>
   </nav>
