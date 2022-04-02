@@ -1,1 +1,220 @@
-<p>checkout works!</p>
+<div class="cust-bg-lightgrey">
+
+    <div class="container">
+
+        <h1 class="text-center">Crate&Barrel</h1>
+        <form #form="ngForm" ngModel>
+        <div class="row">
+            <div class="col-6">
+                <h1 class="center"> Shipping Address </h1>
+
+
+                    <div class="form-floating mb-3">
+                        <input type="text" ngModel name="firstName" #firstName="ngModel" class="form-control"
+                            placeholder="First Name" required pattern="[a-zA-Z]+" minlength="2">
+                        <label>First Name</label>
+                    </div>
+                    <div class="alert alert-danger p-1" *ngIf="firstName.touched && !firstName.valid">
+                        <div *ngIf="firstName.errors?.['required']">
+                            First Name is required
+                        </div>
+                        <div *ngIf="firstName.errors?.['pattern']">
+                            First Name must be letters only
+                        </div>
+                        <div *ngIf="firstName.errors?.['minlength']">
+                            First Name must be 2 or more characters
+                        </div>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input type="text" ngModel name="lastName" #lastName="ngModel" class="form-control"
+                            placeholder="Last Name" required pattern="[a-zA-Z]+" minlength="2">
+                        <label>Last Name</label>
+                    </div>
+                    <div class="alert alert-danger p-1" *ngIf="lastName.touched && !lastName.valid">
+                        <div *ngIf="lastName.errors?.['required']">
+                            Last Name is required
+                        </div>
+                        <div *ngIf="lastName.errors?.['pattern']">
+                            last Name must be letters only
+                        </div>
+                        <div *ngIf="lastName.errors?.['minlength']">
+                            Last Name must be 2 or more characters
+                        </div>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input type="email" ngModel name="email" #email="ngModel" class="form-control"
+                            placeholder="Email address" required pattern="[a-zA-Z\.0-9]+@[a-z]+\.[a-z]{2,3}">
+                        <label>Email address</label>
+                    </div>
+                    <div class="alert alert-danger p-1" *ngIf="email.touched && !email.valid">
+                        <div *ngIf="email.errors?.['required']">
+                            Email is required
+                        </div>
+                        <div *ngIf="email.errors?.['pattern']">
+                            Email address not in valid format
+                        </div>
+                    </div>
+
+
+                    <div class="form-floating mb-3">
+                        <input type="text" ngModel name="streedAddr" #streedAddr="ngModel" class="form-control"
+                            placeholder="Street Address" required>
+                        <label>Street Address</label>
+                    </div>
+                    <div class="alert alert-danger p-1" *ngIf="streedAddr.touched && !streedAddr.valid">
+                        <div *ngIf="streedAddr.errors?.['required']">
+                            Street Address is required
+                        </div>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input type="text" ngModel name="building" #building="ngModel" class="form-control"
+                            placeholder="Apt, Suite, Building(optional)">
+                        <label>Apt, Suite, Building(optional)</label>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-floating mb-3">
+                                <input type="text" ngModel name="zip" #zip="ngModel" class="form-control"
+                                    placeholder="Zip Code">
+                                <label>Zip Code</label>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-floating mb-3">
+                                <select class="form-select form-select-md" name="cityState" placeholder="City, State">
+                                    <option value="" disabled selected>City, State</option>
+                                    <option value="">Winona, MN</option>
+                                    <option value="">Milwaukee, WI</option>
+                                </select>
+                                <label>City, State</label>
+                            </div>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <select class="form-select form-select-md" name="countryRegion"
+                                placeholder="Country/Region">
+                                <option value="" disabled selected>City, State</option>
+                                <option value="">United States</option>
+                                <option value="">Canada</option>
+                            </select>
+                            <label>Country/Region</label>
+                        </div>
+                    </div>
+
+            </div>
+            <div class="col-6">
+                <h1 class="center"> Billing Address </h1>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="useShipping" ngModel #useShipping="ngModel">
+                    <label class="form-check-label" for="flexCheckChecked">
+                      Use my Shipping address
+                    </label>
+                  </div>
+                  <div class="form-floating mb-3">
+                      <select class="form-select form-select-md" name="countryRegion"
+                          placeholder="Country/Region">
+                          <option value="" disabled selected>City, State</option>
+                          <option value="">United States</option>
+                          <option value="">Canada</option>
+                      </select>
+                      <label>Country/Region</label>
+                  </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" ngModel name="firstName" #firstName="ngModel" class="form-control"
+                            placeholder="First Name" required pattern="[a-zA-Z]+" minlength="2">
+                        <label>First Name</label>
+                    </div>
+                    <div class="alert alert-danger p-1" *ngIf="firstName.touched && !firstName.valid">
+                        <div *ngIf="firstName.errors?.['required']">
+                            First Name is required
+                        </div>
+                        <div *ngIf="firstName.errors?.['pattern']">
+                            First Name must be letters only
+                        </div>
+                        <div *ngIf="firstName.errors?.['minlength']">
+                            First Name must be 2 or more characters
+                        </div>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input type="text" ngModel name="lastName" #lastName="ngModel" class="form-control"
+                            placeholder="Last Name" required pattern="[a-zA-Z]+" minlength="2">
+                        <label>Last Name</label>
+                    </div>
+                    <div class="alert alert-danger p-1" *ngIf="lastName.touched && !lastName.valid">
+                        <div *ngIf="lastName.errors?.['required']">
+                            Last Name is required
+                        </div>
+                        <div *ngIf="lastName.errors?.['pattern']">
+                            last Name must be letters only
+                        </div>
+                        <div *ngIf="lastName.errors?.['minlength']">
+                            Last Name must be 2 or more characters
+                        </div>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input type="email" ngModel name="email" #email="ngModel" class="form-control"
+                            placeholder="Email address" required pattern="[a-zA-Z\.0-9]+@[a-z]+\.[a-z]{2,3}">
+                        <label>Email address</label>
+                    </div>
+                    <div class="alert alert-danger p-1" *ngIf="email.touched && !email.valid">
+                        <div *ngIf="email.errors?.['required']">
+                            Email is required
+                        </div>
+                        <div *ngIf="email.errors?.['pattern']">
+                            Email address not in valid format
+                        </div>
+                    </div>
+
+
+                    <div class="form-floating mb-3">
+                        <input type="text" ngModel name="streedAddr" #streedAddr="ngModel" class="form-control"
+                            placeholder="Street Address" required>
+                        <label>Street Address</label>
+                    </div>
+                    <div class="alert alert-danger p-1" *ngIf="streedAddr.touched && !streedAddr.valid">
+                        <div *ngIf="streedAddr.errors?.['required']">
+                            Street Address is required
+                        </div>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input type="text" ngModel name="building" #building="ngModel" class="form-control"
+                            placeholder="Apt, Suite, Building(optional)">
+                        <label>Apt, Suite, Building(optional)</label>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-floating mb-3">
+                                <input type="text" ngModel name="zip" #zip="ngModel" class="form-control"
+                                    placeholder="Zip Code">
+                                <label>Zip Code</label>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-floating mb-3">
+                                <select class="form-select form-select-md" name="cityState" placeholder="City, State">
+                                    <option value="" disabled selected>City, State</option>
+                                    <option value="">Winona, MN</option>
+                                    <option value="">Milwaukee, WI</option>
+                                </select>
+                                <label>City, State</label>
+                            </div>
+                        </div>
+                    </div>
+
+            </div>
+        </div>
+        <div class="center">
+            <button class="btn btn-primary submit-button" type="submit" [disabled]="!form.valid">
+                Sign Up
+            </button>
+        </div>
+        </form>
+    </div>
+</div>
