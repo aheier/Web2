@@ -3,89 +3,76 @@
     <div class="container">
 
         <h1 class="text-center">Crate&Barrel</h1>
-        <form #form="ngForm" ngModel>
         <div class="row">
             <div class="col-6">
                 <h1 class="center"> Shipping Address </h1>
+                
+                <form #shippingForm="ngForm" ngForm>
 
-
-                    <div class="form-floating mb-3">
-                        <input type="text" ngModel name="firstName" #firstName="ngModel" class="form-control"
+                    <div class="form-floating mb-1">
+                        <input type="text" ngModel name="firstName" #shippingFrstName="ngModel" class="form-control"
                             placeholder="First Name" required pattern="[a-zA-Z]+" minlength="2">
                         <label>First Name</label>
                     </div>
-                    <div class="alert alert-danger p-1" *ngIf="firstName.touched && !firstName.valid">
-                        <div *ngIf="firstName.errors?.['required']">
+                    <div class="alert alert-danger p-1" *ngIf="shippingFrstName.touched && !shippingFrstName.valid">
+                        <div *ngIf="shippingFrstName.errors?.['required']">
                             First Name is required
                         </div>
-                        <div *ngIf="firstName.errors?.['pattern']">
+                        <div *ngIf="shippingFrstName.errors?.['pattern']">
                             First Name must be letters only
                         </div>
-                        <div *ngIf="firstName.errors?.['minlength']">
+                        <div *ngIf="shippingFrstName.errors?.['minlength']">
                             First Name must be 2 or more characters
                         </div>
                     </div>
 
-                    <div class="form-floating mb-3">
-                        <input type="text" ngModel name="lastName" #lastName="ngModel" class="form-control"
-                            placeholder="Last Name" required pattern="[a-zA-Z]+" minlength="2">
+                    <div class="form-floating mb-1">
+                        <input type="text" ngModel name="lastName" #shippingLastName="ngModel" 
+                        class="form-control" placeholder="Last Name" required pattern="[a-zA-Z]+" minlength="2">
                         <label>Last Name</label>
                     </div>
-                    <div class="alert alert-danger p-1" *ngIf="lastName.touched && !lastName.valid">
-                        <div *ngIf="lastName.errors?.['required']">
+                    <div class="alert alert-danger p-1" *ngIf="shippingLastName.touched && !shippingLastName.valid">
+                        <div *ngIf="shippingLastName.errors?.['required']">
                             Last Name is required
                         </div>
-                        <div *ngIf="lastName.errors?.['pattern']">
+                        <div *ngIf="shippingLastName.errors?.['pattern']">
                             last Name must be letters only
                         </div>
-                        <div *ngIf="lastName.errors?.['minlength']">
+                        <div *ngIf="shippingLastName.errors?.['minlength']">
                             Last Name must be 2 or more characters
                         </div>
                     </div>
 
-                    <div class="form-floating mb-3">
-                        <input type="email" ngModel name="email" #email="ngModel" class="form-control"
-                            placeholder="Email address" required pattern="[a-zA-Z\.0-9]+@[a-z]+\.[a-z]{2,3}">
-                        <label>Email address</label>
-                    </div>
-                    <div class="alert alert-danger p-1" *ngIf="email.touched && !email.valid">
-                        <div *ngIf="email.errors?.['required']">
-                            Email is required
-                        </div>
-                        <div *ngIf="email.errors?.['pattern']">
-                            Email address not in valid format
-                        </div>
-                    </div>
-
-
-                    <div class="form-floating mb-3">
-                        <input type="text" ngModel name="streedAddr" #streedAddr="ngModel" class="form-control"
+                    <div class="form-floating mb-1">
+                        <input type="text" ngModel name="streetAddress" 
+                        #shippingStreedAddr="ngModel" class="form-control"
                             placeholder="Street Address" required>
                         <label>Street Address</label>
                     </div>
-                    <div class="alert alert-danger p-1" *ngIf="streedAddr.touched && !streedAddr.valid">
-                        <div *ngIf="streedAddr.errors?.['required']">
+                    <div class="alert alert-danger p-1" *ngIf="shippingStreedAddr.touched && !shippingStreedAddr.valid">
+                        <div *ngIf="shippingStreedAddr.errors?.['required']">
                             Street Address is required
                         </div>
                     </div>
 
-                    <div class="form-floating mb-3">
-                        <input type="text" ngModel name="building" #building="ngModel" class="form-control"
+                    <div class="form-floating mb-1">
+                        <input type="text" ngModel name="building" #shippingBuilding="ngModel" class="form-control"
                             placeholder="Apt, Suite, Building(optional)">
                         <label>Apt, Suite, Building(optional)</label>
                     </div>
 
                     <div class="row">
                         <div class="col-6">
-                            <div class="form-floating mb-3">
-                                <input type="text" ngModel name="zip" #zip="ngModel" class="form-control"
+                            <div class="form-floating mb-1">
+                                <input type="text" ngModel name="zip" #shippingZip="ngModel" class="form-control"
                                     placeholder="Zip Code">
                                 <label>Zip Code</label>
                             </div>
                         </div>
                         <div class="col-6">
-                            <div class="form-floating mb-3">
-                                <select class="form-select form-select-md" name="cityState" placeholder="City, State">
+                            <div class="form-floating mb-1">
+                                <select class="form-select form-select-md" name="cityState" 
+                                #cityState="ngModel" ngModel placeholder="City, State">
                                     <option value="" disabled selected>City, State</option>
                                     <option value="">Winona, MN</option>
                                     <option value="">Milwaukee, WI</option>
@@ -93,9 +80,9 @@
                                 <label>City, State</label>
                             </div>
                         </div>
-                        <div class="form-floating mb-3">
+                        <div class="form-floating mb-1">
                             <select class="form-select form-select-md" name="countryRegion"
-                                placeholder="Country/Region">
+                                #shippingCountryRegion="ngModel" ngModel placeholder="Country/Region">
                                 <option value="" disabled selected>City, State</option>
                                 <option value="">United States</option>
                                 <option value="">Canada</option>
@@ -103,118 +90,157 @@
                             <label>Country/Region</label>
                         </div>
                     </div>
-
+                    </form>
             </div>
+
             <div class="col-6">
                 <h1 class="center"> Billing Address </h1>
-                <div class="form-check">
+                <form #billingForm="ngForm" ngForm><div class="form-check">
                     <input class="form-check-input" type="checkbox" name="useShipping" ngModel #useShipping="ngModel">
                     <label class="form-check-label" for="flexCheckChecked">
                       Use my Shipping address
                     </label>
                   </div>
-                  <div class="form-floating mb-3">
-                      <select class="form-select form-select-md" name="countryRegion"
-                          placeholder="Country/Region">
-                          <option value="" disabled selected>City, State</option>
-                          <option value="">United States</option>
-                          <option value="">Canada</option>
-                      </select>
-                      <label>Country/Region</label>
+
+                  <div class="form-floating mb-1">
+                      <input type="text" ngModel name="firstName" #shippingFrstName="ngModel" class="form-control"
+                          placeholder="First Name" required pattern="[a-zA-Z]+" minlength="2">
+                      <label>First Name</label>
                   </div>
-                    <div class="form-floating mb-3">
-                        <input type="text" ngModel name="firstName" #firstName="ngModel" class="form-control"
-                            placeholder="First Name" required pattern="[a-zA-Z]+" minlength="2">
-                        <label>First Name</label>
-                    </div>
-                    <div class="alert alert-danger p-1" *ngIf="firstName.touched && !firstName.valid">
-                        <div *ngIf="firstName.errors?.['required']">
-                            First Name is required
-                        </div>
-                        <div *ngIf="firstName.errors?.['pattern']">
-                            First Name must be letters only
-                        </div>
-                        <div *ngIf="firstName.errors?.['minlength']">
-                            First Name must be 2 or more characters
-                        </div>
-                    </div>
+                  <div class="alert alert-danger p-1" *ngIf="shippingFrstName.touched && !shippingFrstName.valid">
+                      <div *ngIf="shippingFrstName.errors?.['required']">
+                          First Name is required
+                      </div>
+                      <div *ngIf="shippingFrstName.errors?.['pattern']">
+                          First Name must be letters only
+                      </div>
+                      <div *ngIf="shippingFrstName.errors?.['minlength']">
+                          First Name must be 2 or more characters
+                      </div>
+                  </div>
 
-                    <div class="form-floating mb-3">
-                        <input type="text" ngModel name="lastName" #lastName="ngModel" class="form-control"
-                            placeholder="Last Name" required pattern="[a-zA-Z]+" minlength="2">
-                        <label>Last Name</label>
-                    </div>
-                    <div class="alert alert-danger p-1" *ngIf="lastName.touched && !lastName.valid">
-                        <div *ngIf="lastName.errors?.['required']">
-                            Last Name is required
-                        </div>
-                        <div *ngIf="lastName.errors?.['pattern']">
-                            last Name must be letters only
-                        </div>
-                        <div *ngIf="lastName.errors?.['minlength']">
-                            Last Name must be 2 or more characters
-                        </div>
-                    </div>
+                  <div class="form-floating mb-1">
+                      <input type="text" ngModel name="lastName" #shippingLastName="ngModel" 
+                      class="form-control" placeholder="Last Name" required pattern="[a-zA-Z]+" minlength="2">
+                      <label>Last Name</label>
+                  </div>
+                  <div class="alert alert-danger p-1" *ngIf="shippingLastName.touched && !shippingLastName.valid">
+                      <div *ngIf="shippingLastName.errors?.['required']">
+                          Last Name is required
+                      </div>
+                      <div *ngIf="shippingLastName.errors?.['pattern']">
+                          last Name must be letters only
+                      </div>
+                      <div *ngIf="shippingLastName.errors?.['minlength']">
+                          Last Name must be 2 or more characters
+                      </div>
+                  </div>
 
-                    <div class="form-floating mb-3">
-                        <input type="email" ngModel name="email" #email="ngModel" class="form-control"
-                            placeholder="Email address" required pattern="[a-zA-Z\.0-9]+@[a-z]+\.[a-z]{2,3}">
-                        <label>Email address</label>
-                    </div>
-                    <div class="alert alert-danger p-1" *ngIf="email.touched && !email.valid">
-                        <div *ngIf="email.errors?.['required']">
-                            Email is required
+                  <div class="form-floating mb-1">
+                      <input type="text" ngModel name="streetAddress" 
+                      #shippingStreedAddr="ngModel" class="form-control"
+                          placeholder="Street Address" required>
+                      <label>Street Address</label>
+                  </div>
+                  <div class="alert alert-danger p-1" *ngIf="shippingStreedAddr.touched && !shippingStreedAddr.valid">
+                      <div *ngIf="shippingStreedAddr.errors?.['required']">
+                          Street Address is required
+                      </div>
+                  </div>
+
+                  <div class="form-floating mb-1">
+                      <input type="text" ngModel name="building" #shippingBuilding="ngModel" class="form-control"
+                          placeholder="Apt, Suite, Building(optional)">
+                      <label>Apt, Suite, Building(optional)</label>
+                  </div>
+
+                  <div class="row">
+                      <div class="col-6">
+                          <div class="form-floating mb-1">
+                              <input type="text" ngModel name="zip" #shippingZip="ngModel" class="form-control"
+                                  placeholder="Zip Code">
+                              <label>Zip Code</label>
+                          </div>
+                      </div>
+                      <div class="col-6">
+                          <div class="form-floating mb-1">
+                              <select class="form-select form-select-md" name="cityState" 
+                              #cityState="ngModel" ngModel placeholder="City, State">
+                                  <option value="" disabled selected>City, State</option>
+                                  <option value="">Winona, MN</option>
+                                  <option value="">Milwaukee, WI</option>
+                              </select>
+                              <label>City, State</label>
+                          </div>
+                      </div>
+                      <div class="form-floating mb-1">
+                          <select class="form-select form-select-md" name="countryRegion"
+                              #shippingCountryRegion="ngModel" ngModel placeholder="Country/Region">
+                              <option value="" disabled selected>City, State</option>
+                              <option value="">United States</option>
+                              <option value="">Canada</option>
+                          </select>
+                          <label>Country/Region</label>
+                      </div>
+                  </div>
+                </form>
+
+                <form #ccForm="ngForm" ngForm>
+                    <div class="card">
+                        <div class="card-header">
+                            <strong>Credit Card</strong>
                         </div>
-                        <div *ngIf="email.errors?.['pattern']">
-                            Email address not in valid format
-                        </div>
-                    </div>
-
-
-                    <div class="form-floating mb-3">
-                        <input type="text" ngModel name="streedAddr" #streedAddr="ngModel" class="form-control"
-                            placeholder="Street Address" required>
-                        <label>Street Address</label>
-                    </div>
-                    <div class="alert alert-danger p-1" *ngIf="streedAddr.touched && !streedAddr.valid">
-                        <div *ngIf="streedAddr.errors?.['required']">
-                            Street Address is required
-                        </div>
-                    </div>
-
-                    <div class="form-floating mb-3">
-                        <input type="text" ngModel name="building" #building="ngModel" class="form-control"
-                            placeholder="Apt, Suite, Building(optional)">
-                        <label>Apt, Suite, Building(optional)</label>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-6">
-                            <div class="form-floating mb-3">
-                                <input type="text" ngModel name="zip" #zip="ngModel" class="form-control"
-                                    placeholder="Zip Code">
-                                <label>Zip Code</label>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label for="name">Name</label>
+                                        <input class="form-control" id="name" type="text" placeholder="Enter your name">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label for="ccnumber">Credit Card Number</label>
+                                        <div class="input-group">
+                                            <input class="form-control" type="text" placeholder="0000 0000 0000 0000" 
+                                            autocomplete="cc-number">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-sm-4">
+                                    <label for="ccmonth">Month</label>
+                                    <select class="form-control" id="ccmonth">
+                                        <option *ngFor="let year of years; let i = index">{{ i + 1 }}</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-sm-4">
+                                    <label for="ccyear">Year</label>
+                                    <select class="form-control" id="ccyear">
+                                        <option *ngFor="let year of years; let i = index">{{ i + 2020 }}</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label for="cvv">CVV/CVC</label>
+                                        <input class="form-control" id="cvv" type="text" placeholder="123">
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-6">
-                            <div class="form-floating mb-3">
-                                <select class="form-select form-select-md" name="cityState" placeholder="City, State">
-                                    <option value="" disabled selected>City, State</option>
-                                    <option value="">Winona, MN</option>
-                                    <option value="">Milwaukee, WI</option>
-                                </select>
-                                <label>City, State</label>
-                            </div>
-                        </div>
                     </div>
+                </form>
 
             </div>
         </div>
         <div class="center">
-            <button class="btn btn-primary submit-button" type="submit" [disabled]="!form.valid">
-                Sign Up
+            <button class="btn btn-primary submit-button m-3" type="submit" [disabled]="!shippingForm.valid 
+            || !billingForm.valid || !ccForm.valid" (click)="onSubmit(shippingForm, billingForm, ccForm)">
+                Place your order ({{getTotalPrice() | currency}})
             </button>
         </div>
-        </form>
     </div>
 </div>

@@ -10,7 +10,7 @@ import { ProductsService } from '../products.service';
   styleUrls: ['./products.component.css']
 })
 export class ProductsComponent implements OnInit {
-  size:number = 3;
+  size:number = 2;
   products:Array<Product> = [];
   filteredProducts:Array<Product> = [];
   query="";

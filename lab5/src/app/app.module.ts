@@ -15,6 +15,7 @@ import {AngularFireDatabaseModule} from '@angular/fire/compat/database'
 import { environment } from 'src/environments/environment';
 import { FormsModule } from '@angular/forms';
 import { PhoneDirective } from './phone.directive';
+import { BrowserAnimationsModule} from '@angular/platform-browser/animations'
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { PhoneDirective } from './phone.directive';
     AngularFirestoreModule,
     AngularFireDatabaseModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
