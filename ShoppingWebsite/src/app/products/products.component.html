@@ -1,6 +1,13 @@
 <div class="cust-bg-lightgrey">
 <div class="container cust-bg-lightgrey">
-    <H1 class="text-center"> Products </H1>
+    <div>
+    <H1 class="text-center "> Products 
+    <button type="button" class="btn btn-dark btn-sm d-inline float-end m-2"
+    (click)="changeSize(1)">Inc</button>
+    <button type="button" class="btn btn-dark btn-sm d-inline float-end m-2"
+    (click)="changeSize(-1)">Dec</button>
+    </H1>
+    </div>
     <div class="row">
         <div class="col">
             <h3 class="text-warning text-center" *ngIf="filteredProducts.length == 0">Your search does not match any products</h3>

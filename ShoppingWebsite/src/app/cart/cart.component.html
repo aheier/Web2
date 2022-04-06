@@ -1,5 +1,5 @@
-<section style="background-color: #eee; min-height: 280px;">
-    <div class="container h-100 py-5">
+<section class="cust-bg-lightgrey" style="min-height: 80vh;">
+    <div class="container h-200 py-5">
       <div class="row d-flex justify-content-center align-items-center h-100">
         <div class="col-10">
   
@@ -39,7 +39,8 @@
             <div class="card-body">
               <div class="row">
                 <div class="col-8">
-                  <button type="button" class="btn btn-primary btn-block btn-lg">Proceed to Chekout</button>
+                  <button type="button" class="btn btn-primary btn-block btn-lg"
+                  routerLink="/checkout">Proceed to Chekout</button>
                 </div>
                 <div class="col-4">
                   <h6 class="pt-3">Total Price: {{getTotalPrice() | currency}}</h6>

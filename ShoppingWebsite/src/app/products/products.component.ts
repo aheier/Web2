@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { CartService } from '../cart.service';
 import { Product } from '../product';
 import { ProductsService } from '../products.service';
@@ -10,13 +11,13 @@ import { ProductsService } from '../products.service';
   styleUrls: ['./products.component.css']
 })
 export class ProductsComponent implements OnInit {
-  size:number = 2;
+  size:number = 3;
   products:Array<Product> = [];
   filteredProducts:Array<Product> = [];
   query="";
 
   constructor(private productService:ProductsService, private cartService:CartService,
-    private activatedRoute:ActivatedRoute) {
+    private activatedRoute:ActivatedRoute, private toastr:ToastrService) {
     this.products = this.productService.products;
   }
 
@@ -31,12 +32,29 @@ export class ProductsComponent implements OnInit {
       this.filterProducts(this.query);
     });
   }
+  changeSize(n:number){
+    this.size += n;
+    if(this.size >6){
+      this.size = 6
+      return;
+    }
+    if(this.size == 5){
+      this.size +=n
+      return;
+    }
+    if(this.size < 3){
+      this.size = 2;
+    }
+  }
 
   isInCart(product:Product){
     return this.cartService.isProductInCart(product)
   }
   addProductToCart(product:Product){
     this.cartService.addProductIntoCart(product)
+    this.toastr.success(product.getName() + " added to cart.", "Item Added",{
+      timeOut:2000
+    })
   }
   filterProducts(search:string){
     this.filteredProducts = [];

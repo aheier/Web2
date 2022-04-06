@@ -3,54 +3,45 @@
     <div class="container">
 
         <h1 class="text-center">Crate&Barrel</h1>
+        <div class="mb-4 text-center" *ngIf="getTotalPrice() == 0">
+            <h3 class="fw-normal mb-0 text-black">
+              No Items in cart. Head back to <a routerLink="/product">product</a> page.</h3>
+          </div>
         <div class="row">
             <div class="col-6">
                 <h1 class="center"> Shipping Address </h1>
-                
+
                 <form #shippingForm="ngForm" ngForm>
 
                     <div class="form-floating mb-1">
-                        <input type="text" ngModel name="firstName" #shippingFrstName="ngModel" class="form-control"
+                        <input type="text" ngModel name="firstName" #shippingFirstName="ngModel" class="form-control"
                             placeholder="First Name" required pattern="[a-zA-Z]+" minlength="2">
                         <label>First Name</label>
                     </div>
-                    <div class="alert alert-danger p-1" *ngIf="shippingFrstName.touched && !shippingFrstName.valid">
-                        <div *ngIf="shippingFrstName.errors?.['required']">
-                            First Name is required
-                        </div>
-                        <div *ngIf="shippingFrstName.errors?.['pattern']">
-                            First Name must be letters only
-                        </div>
-                        <div *ngIf="shippingFrstName.errors?.['minlength']">
-                            First Name must be 2 or more characters
+                    <div class="alert alert-danger p-1" *ngIf="shippingFirstName.touched && !shippingFirstName.valid">
+                        <div *ngIf="shippingFirstName.errors">
+                            First Name is invalid
                         </div>
                     </div>
 
                     <div class="form-floating mb-1">
-                        <input type="text" ngModel name="lastName" #shippingLastName="ngModel" 
-                        class="form-control" placeholder="Last Name" required pattern="[a-zA-Z]+" minlength="2">
+                        <input type="text" ngModel name="lastName" #shippingLastName="ngModel" class="form-control"
+                            placeholder="Last Name" required pattern="[a-zA-Z]+" minlength="2">
                         <label>Last Name</label>
                     </div>
                     <div class="alert alert-danger p-1" *ngIf="shippingLastName.touched && !shippingLastName.valid">
-                        <div *ngIf="shippingLastName.errors?.['required']">
+                        <div *ngIf="shippingLastName.errors">
                             Last Name is required
-                        </div>
-                        <div *ngIf="shippingLastName.errors?.['pattern']">
-                            last Name must be letters only
-                        </div>
-                        <div *ngIf="shippingLastName.errors?.['minlength']">
-                            Last Name must be 2 or more characters
                         </div>
                     </div>
 
                     <div class="form-floating mb-1">
-                        <input type="text" ngModel name="streetAddress" 
-                        #shippingStreedAddr="ngModel" class="form-control"
-                            placeholder="Street Address" required>
+                        <input type="text" ngModel name="streetAddress" #shippingStreetAddr="ngModel"
+                            class="form-control" placeholder="Street Address" required>
                         <label>Street Address</label>
                     </div>
-                    <div class="alert alert-danger p-1" *ngIf="shippingStreedAddr.touched && !shippingStreedAddr.valid">
-                        <div *ngIf="shippingStreedAddr.errors?.['required']">
+                    <div class="alert alert-danger p-1" *ngIf="shippingStreetAddr.touched && !shippingStreetAddr.valid">
+                        <div *ngIf="shippingStreetAddr.errors?.['required']">
                             Street Address is required
                         </div>
                     </div>
@@ -65,124 +56,125 @@
                         <div class="col-6">
                             <div class="form-floating mb-1">
                                 <input type="text" ngModel name="zip" #shippingZip="ngModel" class="form-control"
-                                    placeholder="Zip Code">
+                                    required placeholder="Zip Code">
                                 <label>Zip Code</label>
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="form-floating mb-1">
-                                <select class="form-select form-select-md" name="cityState" 
-                                #cityState="ngModel" ngModel placeholder="City, State">
+                                <select class="form-select form-select-md" name="cityState" #shippingCityState="ngModel"
+                                    ngModel required placeholder="City, State">
                                     <option value="" disabled selected>City, State</option>
-                                    <option value="">Winona, MN</option>
-                                    <option value="">Milwaukee, WI</option>
+                                    <option value="Winona, MN">Winona, MN</option>
+                                    <option value="Milwaukee, WI">Milwaukee, WI</option>
                                 </select>
                                 <label>City, State</label>
                             </div>
                         </div>
                         <div class="form-floating mb-1">
                             <select class="form-select form-select-md" name="countryRegion"
-                                #shippingCountryRegion="ngModel" ngModel placeholder="Country/Region">
+                                #shippingCountryRegion="ngModel" ngModel required placeholder="Country/Region">
                                 <option value="" disabled selected>City, State</option>
-                                <option value="">United States</option>
-                                <option value="">Canada</option>
+                                <option value="US">United States</option>
+                                <option value="CA">Canada</option>
                             </select>
                             <label>Country/Region</label>
                         </div>
                     </div>
-                    </form>
+                </form>
             </div>
-
+            <!-- Billing address section -->
             <div class="col-6">
                 <h1 class="center"> Billing Address </h1>
-                <form #billingForm="ngForm" ngForm><div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="useShipping" ngModel #useShipping="ngModel">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" (change)="isUseShipping = !isUseShipping;"
+                        name="useShipping" ngModel #useShipping="ngModel">
                     <label class="form-check-label" for="flexCheckChecked">
-                      Use my Shipping address
+                        Use my Shipping address
                     </label>
-                  </div>
+                </div>
 
-                  <div class="form-floating mb-1">
-                      <input type="text" ngModel name="firstName" #shippingFrstName="ngModel" class="form-control"
-                          placeholder="First Name" required pattern="[a-zA-Z]+" minlength="2">
-                      <label>First Name</label>
-                  </div>
-                  <div class="alert alert-danger p-1" *ngIf="shippingFrstName.touched && !shippingFrstName.valid">
-                      <div *ngIf="shippingFrstName.errors?.['required']">
-                          First Name is required
-                      </div>
-                      <div *ngIf="shippingFrstName.errors?.['pattern']">
-                          First Name must be letters only
-                      </div>
-                      <div *ngIf="shippingFrstName.errors?.['minlength']">
-                          First Name must be 2 or more characters
-                      </div>
-                  </div>
+                <form #billingForm="ngForm" ngForm>
 
-                  <div class="form-floating mb-1">
-                      <input type="text" ngModel name="lastName" #shippingLastName="ngModel" 
-                      class="form-control" placeholder="Last Name" required pattern="[a-zA-Z]+" minlength="2">
-                      <label>Last Name</label>
-                  </div>
-                  <div class="alert alert-danger p-1" *ngIf="shippingLastName.touched && !shippingLastName.valid">
-                      <div *ngIf="shippingLastName.errors?.['required']">
-                          Last Name is required
-                      </div>
-                      <div *ngIf="shippingLastName.errors?.['pattern']">
-                          last Name must be letters only
-                      </div>
-                      <div *ngIf="shippingLastName.errors?.['minlength']">
-                          Last Name must be 2 or more characters
-                      </div>
-                  </div>
+                    <div class="form-floating mb-1">
+                        <input type="text" ngModel name="firstName" #billingFirstName="ngModel" class="form-control"
+                            [value]="isUseShipping? shippingFirstName.value : ''" placeholder="First Name" required
+                            [disabled]="isUseShipping" pattern="[a-zA-Z]+" minlength="2">
+                        <label>First Name</label>
+                    </div>
+                    <div class="alert alert-danger p-1" *ngIf="billingFirstName.touched && 
+                    !billingFirstName.valid && !isUseShipping">
+                        <div *ngIf="billingFirstName.errors">
+                            First Name is invalid
+                        </div>
+                    </div>
 
-                  <div class="form-floating mb-1">
-                      <input type="text" ngModel name="streetAddress" 
-                      #shippingStreedAddr="ngModel" class="form-control"
-                          placeholder="Street Address" required>
-                      <label>Street Address</label>
-                  </div>
-                  <div class="alert alert-danger p-1" *ngIf="shippingStreedAddr.touched && !shippingStreedAddr.valid">
-                      <div *ngIf="shippingStreedAddr.errors?.['required']">
-                          Street Address is required
-                      </div>
-                  </div>
+                    <div class="form-floating mb-1">
+                        <input type="text" ngModel name="lastName" #billingLastName="ngModel"
+                            [value]="isUseShipping ? shippingLastName.value : ''" class="form-control"
+                            [disabled]="isUseShipping" placeholder="Last Name" required pattern="[a-zA-Z]+" minlength="2">
+                        <label>Last Name</label>
+                    </div>
+                    <div class="alert alert-danger p-1" *ngIf="billingLastName.touched && 
+                    !billingLastName.valid && !isUseShipping">
+                        <div *ngIf="billingLastName.errors">
+                            Last Name is invalid
+                        </div>
+                    </div>
 
-                  <div class="form-floating mb-1">
-                      <input type="text" ngModel name="building" #shippingBuilding="ngModel" class="form-control"
-                          placeholder="Apt, Suite, Building(optional)">
-                      <label>Apt, Suite, Building(optional)</label>
-                  </div>
+                    <div class="form-floating mb-1">
+                        <input type="text" ngModel name="streetAddress" #billingStreetAddr="ngModel"
+                            class="form-control" [value]="isUseShipping ? shippingStreetAddr.value : ''"
+                            [disabled]="isUseShipping" placeholder="Street Address" required>
+                        <label>Street Address</label>
+                    </div>
+                    <div class="alert alert-danger p-1" *ngIf="billingStreetAddr.touched 
+                    && !billingStreetAddr.valid && !isUseShipping">
+                        <div *ngIf="billingStreetAddr.errors?.['required']">
+                            Street Address is required
+                        </div>
+                    </div>
 
-                  <div class="row">
-                      <div class="col-6">
-                          <div class="form-floating mb-1">
-                              <input type="text" ngModel name="zip" #shippingZip="ngModel" class="form-control"
-                                  placeholder="Zip Code">
-                              <label>Zip Code</label>
-                          </div>
-                      </div>
-                      <div class="col-6">
-                          <div class="form-floating mb-1">
-                              <select class="form-select form-select-md" name="cityState" 
-                              #cityState="ngModel" ngModel placeholder="City, State">
-                                  <option value="" disabled selected>City, State</option>
-                                  <option value="">Winona, MN</option>
-                                  <option value="">Milwaukee, WI</option>
-                              </select>
-                              <label>City, State</label>
-                          </div>
-                      </div>
-                      <div class="form-floating mb-1">
-                          <select class="form-select form-select-md" name="countryRegion"
-                              #shippingCountryRegion="ngModel" ngModel placeholder="Country/Region">
-                              <option value="" disabled selected>City, State</option>
-                              <option value="">United States</option>
-                              <option value="">Canada</option>
-                          </select>
-                          <label>Country/Region</label>
-                      </div>
-                  </div>
+                    <div class="form-floating mb-1">
+                        <input type="text" ngModel name="building" #billingBuilding="ngModel" class="form-control"
+                            [value]="isUseShipping ? shippingBuilding.value : ''"
+                            [disabled]="isUseShipping" placeholder="Apt, Suite, Building(optional)">
+                        <label>Apt, Suite, Building(optional)</label>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-floating mb-1">
+                                <input type="text" ngModel name="zip" #billingZip="ngModel" class="form-control"
+                                    required [value]="isUseShipping ? shippingZip.value : ''" 
+                                    [disabled]="isUseShipping" placeholder="Zip Code">
+                                <label>Zip Code</label>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-floating mb-1">
+                                <select class="form-select form-select-md" name="cityState" required
+                                    [value]="isUseShipping ? shippingCityState.value : ''" #billingCityState="ngModel"
+                                    ngModel placeholder="City, State" [disabled]="isUseShipping">
+                                    <!-- <option value="" disabled selected>City, State</option> -->
+                                    <option value="Winona, MN">Winona, MN</option>
+                                    <option value="Milwaukee, WI">Milwaukee, WI</option>
+                                </select>
+                                <label>City, State</label>
+                            </div>
+                        </div>
+                        <div class="form-floating mb-1">
+                            <select class="form-select form-select-md" name="countryRegion"
+                                [value]="isUseShipping ? shippingCountryRegion.value : ''" required
+                                #billingCountryRegion="ngModel" ngModel placeholder="Country/Region"
+                                [disabled]="isUseShipping">
+                                <!-- <option value="" disabled selected>City, State</option> -->
+                                <option value="US">United States</option>
+                                <option value="CA">Canada</option>
+                            </select>
+                            <label>Country/Region</label>
+                        </div>
+                    </div>
                 </form>
 
                 <form #ccForm="ngForm" ngForm>
@@ -195,7 +187,11 @@
                                 <div class="col-sm-12">
                                     <div class="form-group">
                                         <label for="name">Name</label>
-                                        <input class="form-control" id="name" type="text" placeholder="Enter your name">
+                                        <input class="form-control" #name="ngModel" ngModel type="text" name="name"
+                                            required placeholder="Enter your name">
+                                        <div class="alert alert-danger p-1" *ngIf="name.touched && !name.valid">
+                                            Required
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -204,8 +200,12 @@
                                     <div class="form-group">
                                         <label for="ccnumber">Credit Card Number</label>
                                         <div class="input-group">
-                                            <input class="form-control" type="text" placeholder="0000 0000 0000 0000" 
-                                            autocomplete="cc-number">
+                                            <input class="form-control" type="text" required
+                                                placeholder="0000 0000 0000 0000" #ccNumber="ngModel" ngModel
+                                                name="ccNumber" autocomplete="cc-number">
+                                        </div>
+                                        <div class="alert alert-danger p-1" *ngIf="ccNumber.touched && !ccNumber.valid">
+                                            Required
                                         </div>
                                     </div>
                                 </div>
@@ -213,20 +213,34 @@
                             <div class="row">
                                 <div class="form-group col-sm-4">
                                     <label for="ccmonth">Month</label>
-                                    <select class="form-control" id="ccmonth">
-                                        <option *ngFor="let year of years; let i = index">{{ i + 1 }}</option>
+                                    <select class="form-control" id="ccmonth" #month="ngModel" ngModel required
+                                        name="month">
+                                        <option [value]="i+1" *ngFor="let year of years; let i = index">{{ i + 1 }}
+                                        </option>
                                     </select>
+                                    <div class="alert alert-danger p-1" *ngIf="month.touched && !month.valid">
+                                        Required
+                                    </div>
                                 </div>
                                 <div class="form-group col-sm-4">
                                     <label for="ccyear">Year</label>
-                                    <select class="form-control" id="ccyear">
-                                        <option *ngFor="let year of years; let i = index">{{ i + 2020 }}</option>
+                                    <select class="form-control" id="ccyear" #year="ngModel" ngModel required
+                                        name="year">
+                                        <option [value]="i+2020" *ngFor="let y of years; let i = index">{{ i + 2020
+                                            }}</option>
                                     </select>
+                                    <div class="alert alert-danger p-1" *ngIf="year.touched && !year.valid">
+                                        Required
+                                    </div>
                                 </div>
                                 <div class="col-sm-4">
                                     <div class="form-group">
                                         <label for="cvv">CVV/CVC</label>
-                                        <input class="form-control" id="cvv" type="text" placeholder="123">
+                                        <input class="form-control" id="cvv" name="cvc" required #cvv="ngModel" ngModel
+                                            type="text" placeholder="123">
+                                    </div>
+                                    <div class="alert alert-danger p-1" *ngIf="cvv.touched && !cvv.valid">
+                                        Required
                                     </div>
                                 </div>
                             </div>
@@ -237,8 +251,9 @@
             </div>
         </div>
         <div class="center">
-            <button class="btn btn-primary submit-button m-3" type="submit" [disabled]="!shippingForm.valid 
-            || !billingForm.valid || !ccForm.valid" (click)="onSubmit(shippingForm, billingForm, ccForm)">
+            <button class="btn btn-primary submit-button m-3" type="submit" [disabled]=" isUseShipping ? (!shippingForm.valid || !ccForm.valid || getTotalPrice()==0) :
+             (!shippingForm.valid || !billingForm.valid || !ccForm.valid || getTotalPrice()==0)" (click)=" isUseShipping? onSubmit(shippingForm, shippingForm, ccForm) :
+             onSubmit(shippingForm, billingForm, ccForm)">
                 Place your order ({{getTotalPrice() | currency}})
             </button>
         </div>

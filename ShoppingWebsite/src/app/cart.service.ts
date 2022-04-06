@@ -15,7 +15,7 @@ export class CartService {
   
   getCartProducts() { return this.cartProducts}
   getTotalPrice() { 
-      if (this.cartProducts.length == 0) return 0.00;
+      if (this.cartProducts.length == 0) return 0;
       this.totalPrice = 0;
       this.cartProducts.forEach( (product) =>{
           this.totalPrice += product.getPrice();
@@ -51,5 +51,8 @@ export class CartService {
           }
       });
       return hasProduct;
+ }
+ resetCart(): void{
+     this.cartProducts = [];
  }
 }
