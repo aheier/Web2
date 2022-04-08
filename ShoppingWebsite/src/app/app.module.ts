@@ -37,7 +37,7 @@ import { RatingComponent } from './rating/rating.component';
     MatDialogModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
-    MatIconModule
+    MatIconModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

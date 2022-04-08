@@ -35,11 +35,11 @@ export class ProductsComponent implements OnInit {
   changeSize(n:number){
     this.size += n;
     if(this.size >6){
-      this.size = 6
+      this.size = 6;
       return;
     }
     if(this.size == 5){
-      this.size +=n
+      this.size +=n;
       return;
     }
     if(this.size < 3){
