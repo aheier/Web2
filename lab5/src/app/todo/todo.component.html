@@ -1,0 +1,9 @@
+<div class="container" >
+    <h1> My To DO </h1>
+    <input class="form-control" #inp type="text" [(ngModel)]="currentValue" (keyup.enter)="addTodo(inp.value)">
+    <div class="list-group" *ngFor="let todo of todos | async">
+        <button class="list-group-item" (click)="removeTodo(todo.key)"> 
+            {{todo.value}}
+        </button>
+    </div>
+</div>

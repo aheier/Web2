@@ -15,7 +15,8 @@ import {AngularFireDatabaseModule} from '@angular/fire/compat/database'
 import { environment } from 'src/environments/environment';
 import { FormsModule } from '@angular/forms';
 import { PhoneDirective } from './phone.directive';
-import { BrowserAnimationsModule} from '@angular/platform-browser/animations'
+import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { TodoComponent } from './todo/todo.component'
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { BrowserAnimationsModule} from '@angular/platform-browser/animations'
     HomeComponent,
     SignupComponent,
     AboutComponent,
-    PhoneDirective
+    PhoneDirective,
+    TodoComponent
   ],
   imports: [
     BrowserModule,

@@ -27,6 +27,7 @@
                   (click)="addProductToCart(product); btn.value='Added'">
                        {{ isInCart(product) ? "Added" : "Add to Cart"}} </button>
                 </div>
+                <app-rating class="px-1" [initialRating]="product.getRating()" (ratingEmitter)="product.setRating($event)"></app-rating>
             </div>
             <br>
         </div>

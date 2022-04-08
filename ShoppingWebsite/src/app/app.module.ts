@@ -14,6 +14,8 @@ import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ToastrModule } from 'ngx-toastr';
+import {MatIconModule} from '@angular/material/icon';
+import { RatingComponent } from './rating/rating.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,8 @@ import { ToastrModule } from 'ngx-toastr';
     HeaderComponent,
     FooterComponent,
     PhoneDirective,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    RatingComponent
   ],
   imports: [
     BrowserModule,
@@ -33,7 +36,8 @@ import { ToastrModule } from 'ngx-toastr';
     NoopAnimationsModule,
     MatDialogModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]
