@@ -1,36 +1,39 @@
-<div class="cust-bg-lightgrey">
-<div class="container cust-bg-lightgrey">
-    <div>
-    <H1 class="text-center "> Products 
-    <button type="button" class="btn btn-dark btn-sm d-inline float-end m-2"
-    (click)="changeSize(1)">Inc</button>
-    <button type="button" class="btn btn-dark btn-sm d-inline float-end m-2"
-    (click)="changeSize(-1)">Dec</button>
-    </H1>
-    </div>
-    <div class="row">
-        <div class="col">
-            <h3 class="text-warning text-center" *ngIf="filteredProducts.length == 0">Your search does not match any products</h3>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-{{size}}" *ngFor="let product of filteredProducts; let i = index;">
-            <div class="card">
-                <img class="card-img-top" [src]="product.getImagePath()">
-                <div class="card-body">
-                  <h5 class="card-title">{{product.getName()}}</h5>
-                  <p class="card-text"> {{product.getDescription()}}</p>
-                </div>
-                <div class="card-body">
-                  <span class=""> Price : {{product.getPrice() | currency}} </span>
-                  <button #btn class="btn btn-sm btn-primary float-end" 
-                  (click)="addProductToCart(product); btn.value='Added'">
-                       {{ isInCart(product) ? "Added" : "Add to Cart"}} </button>
-                </div>
-                <app-rating class="px-1" [initialRating]="product.getRating()" (ratingEmitter)="product.setRating($event)"></app-rating>
+<div class="cust-bg-lightgrey min-height">
+    <div class="container">
+        <div>
+            <H1 class="text-center mb-0"> Products
+            </H1>
+            <div class="clearfix">
+                <button type="button" class="btn btn-dark btn-sm d-inline mb-2 mx-2 float-end"
+                    (click)="changeSize(1)">Inc</button>
+                <button type="button" class="btn btn-dark btn-sm d-inline mb-2 mx-2 float-end"
+                    (click)="changeSize(-1)">Dec</button>
             </div>
-            <br>
+        </div>
+        <div class="row" *ngIf="filteredProducts.length == 0">
+            <div class="col">
+                <h3 class="text-warning text-center">Your search does not match any products</h3>
+            </div>
+        </div>
+        <div class="row clearfix">
+            <div class="col-{{size}}" *ngFor="let product of filteredProducts; let i = index;">
+                <div class="card">
+                    <img class="card-img-top" [src]="product.getImagePath()">
+                    <div class="card-body">
+                        <h5 class="card-title">{{product.getName()}}</h5>
+                        <p class="card-text"> {{product.getDescription()}}</p>
+                    </div>
+                    <div class="card-body">
+                        <span class=""> Price : {{product.getPrice() | currency}} </span>
+                        <button #btn class="btn btn-sm btn-primary float-end"
+                            (click)="addProductToCart(product); btn.value='Added'">
+                            {{ isInCart(product) ? "Added" : "Add to Cart"}} </button>
+                    </div>
+                    <app-rating class="px-1" [initialRating]="product.getRating()"
+                        (ratingEmitter)="product.setRating($event)"></app-rating>
+                </div>
+                <br>
+            </div>
         </div>
     </div>
-</div>
 </div>

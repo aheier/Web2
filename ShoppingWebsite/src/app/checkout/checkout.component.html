@@ -1,12 +1,12 @@
-<div class="cust-bg-lightgrey">
+<div class="cust-bg-lightgrey min-height">
 
     <div class="container">
 
         <h1 class="text-center">Crate&Barrel</h1>
         <div class="mb-4 text-center" *ngIf="getTotalPrice() == 0">
             <h3 class="fw-normal mb-0 text-black">
-              No Items in cart. Head back to <a routerLink="/product">product</a> page.</h3>
-          </div>
+                No Items in cart. Head back to <a routerLink="/product">product</a> page.</h3>
+        </div>
         <div class="row">
             <div class="col-6">
                 <h1 class="center"> Shipping Address </h1>
@@ -112,7 +112,8 @@
                     <div class="form-floating mb-1">
                         <input type="text" ngModel name="lastName" #billingLastName="ngModel"
                             [value]="isUseShipping ? shippingLastName.value : ''" class="form-control"
-                            [disabled]="isUseShipping" placeholder="Last Name" required pattern="[a-zA-Z]+" minlength="2">
+                            [disabled]="isUseShipping" placeholder="Last Name" required pattern="[a-zA-Z]+"
+                            minlength="2">
                         <label>Last Name</label>
                     </div>
                     <div class="alert alert-danger p-1" *ngIf="billingLastName.touched && 
@@ -137,8 +138,8 @@
 
                     <div class="form-floating mb-1">
                         <input type="text" ngModel name="building" #billingBuilding="ngModel" class="form-control"
-                            [value]="isUseShipping ? shippingBuilding.value : ''"
-                            [disabled]="isUseShipping" placeholder="Apt, Suite, Building(optional)">
+                            [value]="isUseShipping ? shippingBuilding.value : ''" [disabled]="isUseShipping"
+                            placeholder="Apt, Suite, Building(optional)">
                         <label>Apt, Suite, Building(optional)</label>
                     </div>
 
@@ -146,8 +147,8 @@
                         <div class="col-6">
                             <div class="form-floating mb-1">
                                 <input type="text" ngModel name="zip" #billingZip="ngModel" class="form-control"
-                                    required [value]="isUseShipping ? shippingZip.value : ''" 
-                                    [disabled]="isUseShipping" placeholder="Zip Code">
+                                    required [value]="isUseShipping ? shippingZip.value : ''" [disabled]="isUseShipping"
+                                    placeholder="Zip Code">
                                 <label>Zip Code</label>
                             </div>
                         </div>
@@ -251,11 +252,18 @@
             </div>
         </div>
         <div class="center">
-            <button class="btn btn-primary submit-button m-3" type="submit" [disabled]=" isUseShipping ? (!shippingForm.valid || !ccForm.valid || getTotalPrice()==0) :
+            <div class="text-center clearfix m-0" *ngIf="getTotalPrice() == 0; else hasItems">
+                <h5 class="fw-normal p-1 text-black float-start">
+                    No Items in cart. Head back to <a routerLink="/product">product</a> page.
+                </h5>
+            </div>
+            <ng-template #hasItems>
+                <button class="btn btn-primary submit-button m-3" type="submit" [disabled]=" isUseShipping ? (!shippingForm.valid || !ccForm.valid || getTotalPrice()==0) :
              (!shippingForm.valid || !billingForm.valid || !ccForm.valid || getTotalPrice()==0)" (click)=" isUseShipping? onSubmit(shippingForm, shippingForm, ccForm) :
              onSubmit(shippingForm, billingForm, ccForm)">
-                Place your order ({{getTotalPrice() | currency}})
-            </button>
+                    Place your order ({{getTotalPrice() | currency}})
+                </button>
+            </ng-template>
         </div>
     </div>
 </div>
