@@ -51,10 +51,12 @@ export class ProductsComponent implements OnInit {
     return this.cartService.isProductInCart(product)
   }
   addProductToCart(product:Product){
-    this.cartService.addProductIntoCart(product)
-    this.toastr.success(product.getName() + " added to cart.", "Item Added",{
-      timeOut:2000
-    })
+    if(!this.isInCart(product)){
+      this.cartService.addProductIntoCart(product)
+      this.toastr.success(product.getName() + " added to cart.", "Item Added",{
+        timeOut:2000
+      })
+    }
   }
   filterProducts(search:string){
     this.filteredProducts = [];

@@ -27,6 +27,8 @@
                         <span class="card-text"> Price : {{product.getPrice() | currency}} </span>
                     </div>
                     <button #btn class="btn btn-sm btn-primary float-end"
+                    [ngClass]="isInCart(product) ? 'btn-success' : 'btn-primary'"
+                    [disabled]="isInCart(product)"
                         (click)="addProductToCart(product); btn.value='Added'">
                         {{ isInCart(product) ? "Added" : "Add to Cart"}} </button>
                     <app-rating class="px-1 text-center" [initialRating]="product.getRating()"

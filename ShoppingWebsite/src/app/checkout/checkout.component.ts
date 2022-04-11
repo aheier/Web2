@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { NgForm, NgModel } from '@angular/forms';
 import { CartService } from '../cart.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
@@ -14,10 +14,17 @@ import { delay } from 'rxjs';
 })
 export class CheckoutComponent implements OnInit {
   years = new Array(12)
+  shipCityState? = ""
+  billCityState? = ""
 
+  zipToCity = new Map<string, string>() 
   isUseShipping: boolean = false;
+
   constructor(private cartService: CartService, public dialog: MatDialog,
     private router:Router, private toastr:ToastrService) {
+      this.zipToCity.set("55987", "Winona, MN")
+      this.zipToCity.set("55988", "Stockton, MN")
+      this.zipToCity.set("55990", "Wykoff, MN")
   }
   openDialog() {
     const dialogRef = this.dialog.open(ConfirmDialogComponent);
@@ -28,6 +35,16 @@ export class CheckoutComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+  preloadZip(zip:any, isShipping:boolean){
+    if(this.zipToCity.has(zip)){
+      if(isShipping) {
+        this.shipCityState = this.zipToCity.get(zip)
+        return;
+      }
+      this.billCityState = this.zipToCity.get(zip)
+      // this.
+    }
   }
 
   getTotalPrice() {

@@ -2,7 +2,7 @@
 
     <div class="container">
 
-        <h1 class="text-center">Crate&Barrel</h1>
+        <h1 class="text-center">Shoe Supply Checkout</h1>
         <div class="mb-4 text-center" *ngIf="getTotalPrice() == 0">
             <h3 class="fw-normal mb-0 text-black">
                 No Items in cart. Head back to <a routerLink="/product">product</a> page.</h3>
@@ -56,17 +56,19 @@
                         <div class="col-6">
                             <div class="form-floating mb-1">
                                 <input type="text" ngModel name="zip" #shippingZip="ngModel" class="form-control"
-                                    required placeholder="Zip Code">
+                                    required placeholder="Zip Code" (keyup)="preloadZip(shippingZip.value, true)">
                                 <label>Zip Code</label>
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="form-floating mb-1">
                                 <select class="form-select form-select-md" name="cityState" #shippingCityState="ngModel"
-                                    ngModel required placeholder="City, State">
+                                    ngModel required placeholder="City, State" [(ngModel)]="shipCityState" >
                                     <option value="" disabled selected>City, State</option>
                                     <option value="Winona, MN">Winona, MN</option>
                                     <option value="Milwaukee, WI">Milwaukee, WI</option>
+                                    <option value="Stockton, MN">Stockton, MN</option>
+                                    <option value="Wykoff, MN">Wykoff, MN</option>
                                 </select>
                                 <label>City, State</label>
                             </div>
@@ -148,7 +150,7 @@
                             <div class="form-floating mb-1">
                                 <input type="text" ngModel name="zip" #billingZip="ngModel" class="form-control"
                                     required [value]="isUseShipping ? shippingZip.value : ''" [disabled]="isUseShipping"
-                                    placeholder="Zip Code">
+                                    placeholder="Zip Code" (keyup)="preloadZip(billingZip.value, false)">
                                 <label>Zip Code</label>
                             </div>
                         </div>
@@ -156,10 +158,12 @@
                             <div class="form-floating mb-1">
                                 <select class="form-select form-select-md" name="cityState" required
                                     [value]="isUseShipping ? shippingCityState.value : ''" #billingCityState="ngModel"
-                                    ngModel placeholder="City, State" [disabled]="isUseShipping">
+                                    ngModel placeholder="City, State" [disabled]="isUseShipping"  [(ngModel)]="billCityState">
                                     <!-- <option value="" disabled selected>City, State</option> -->
                                     <option value="Winona, MN">Winona, MN</option>
                                     <option value="Milwaukee, WI">Milwaukee, WI</option>
+                                    <option value="Stockton, MN">Stockton, MN</option>
+                                    <option value="Wykoff, MN">Wykoff, MN</option>
                                 </select>
                                 <label>City, State</label>
                             </div>
