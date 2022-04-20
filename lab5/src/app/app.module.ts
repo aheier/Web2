@@ -16,7 +16,9 @@ import { environment } from 'src/environments/environment';
 import { FormsModule } from '@angular/forms';
 import { PhoneDirective } from './phone.directive';
 import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import { TodoComponent } from './todo/todo.component'
+import { TodoComponent } from './todo/todo.component';
+import { MemberComponent } from './member/member.component'
+import { CookieService } from 'ngx-cookie-service';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,8 @@ import { TodoComponent } from './todo/todo.component'
     SignupComponent,
     AboutComponent,
     PhoneDirective,
-    TodoComponent
+    TodoComponent,
+    MemberComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +42,8 @@ import { TodoComponent } from './todo/todo.component'
     FormsModule,
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [
+    CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

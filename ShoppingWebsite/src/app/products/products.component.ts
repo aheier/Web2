@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFireDatabase, AngularFireList } from '@angular/fire/compat/database';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { map, Observable } from 'rxjs';
 import { CartService } from '../cart.service';
 import { Product } from '../product';
 import { ProductsService } from '../products.service';
@@ -12,27 +14,28 @@ import { ProductsService } from '../products.service';
 })
 export class ProductsComponent implements OnInit {
   size:number = 3;
-  products:Array<Product> = [];
-  filteredProducts:Array<Product> = [];
+  products:Observable<any> | undefined;
+  filteredProducts:Observable<any> | undefined ;
   query="";
 
   constructor(private productService:ProductsService, private cartService:CartService,
-    private activatedRoute:ActivatedRoute, private toastr:ToastrService) {
-    this.products = this.productService.products;
+    private activatedRoute:ActivatedRoute, private toastr:ToastrService, private db:AngularFireDatabase) {
   }
 
   ngOnInit(): void {
+    this.products = this.productService.products;
     this.activatedRoute.queryParams.subscribe(params =>{
       this.query = params['search'];
-      console.log(this.query)
+      // console.log(this.query)
       if(this.query == "" || this.query == null){
-        this.filteredProducts = this.productService.products;
+        this.filteredProducts = this.products;
         return;
       }
       this.filterProducts(this.query);
     });
   }
   changeSize(n:number){
+    console.log(this.products)
     this.size += n;
     if(this.size >6){
       this.size = 6;
@@ -59,12 +62,12 @@ export class ProductsComponent implements OnInit {
     }
   }
   filterProducts(search:string){
-    this.filteredProducts = [];
-    this.products.forEach(element => {
-      if(element.getName().toLocaleLowerCase().match(search.toLowerCase())){
-        this.filteredProducts.push(element);
-      }
-    });
+    // this.filteredProducts;
+    // this.products.forEach(element => {
+    //   if(element.getName().toLocaleLowerCase().match(search.toLowerCase())){
+    //     this.filteredProducts.push(element);
+    //   }
+    // });
 
   }
 }

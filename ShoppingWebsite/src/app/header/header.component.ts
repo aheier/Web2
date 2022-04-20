@@ -11,10 +11,11 @@ export class HeaderComponent implements OnInit {
   constructor(private router:Router) { }
 
   ngOnInit(): void {
+
   }
   onSearch(el:HTMLInputElement){
     console.log(el.value)
-    this.router.navigate(['/product'], {queryParams:{search: el.value}})
+    this.router.navigate(['/products'], {queryParams:{search: el.value}})
   }
 
 }

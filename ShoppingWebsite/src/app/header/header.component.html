@@ -1,28 +1,32 @@
 <nav class="navbar navbar-expand-lg navbar-dark cust-bg-black px-5 sticky-top">
-    <div class="container-fluid">
-      <a class="navbar-brand" routerLink="/products">Shoe's Supply</a>
-      <button class="navbar-toggler" type="button" 
-      data-bs-toggle="collapse" data-bs-target="#navbarToggler" aria-controls="navbarToggler" 
-      aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarToggler">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/products" routerLinkActive="active">Products</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/cart" routerLinkActive="active">Cart</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/checkout" routerLinkActive="active">Checkout</a>
-          </li>
-        </ul>
-        <div class="d-flex">
-          <input class="form-control me-2" ngModel type="search" placeholder="Search" 
-          aria-label="Search" #search (keydown.enter)="onSearch(search)">
-          <button class="btn btn-outline-success" type="button" (click)="onSearch(search)">Search</button>
-        </div>
+  <div class="container-fluid">
+    <a class="navbar-brand" routerLink="/products">Shoe's Supply</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler"
+      aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarToggler">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/products" routerLinkActive="active">Products</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/cart" routerLinkActive="active">Cart</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/checkout" routerLinkActive="active">Checkout</a>
+        </li>
+      </ul>
+      <div class="d-flex">
+        <input class="form-control me-2" ngModel type="search" placeholder="Search" aria-label="Search" #search
+          (keydown.enter)="onSearch(search)">
+        <button class="btn btn-outline-success" type="button" (click)="onSearch(search)">Search</button>
+        <a routerLink="/admin/login">
+          <button class="btn btn-dark d-inline mx-2">
+            <mat-icon style="color:white;" class="align-middle">person</mat-icon>
+          </button>
+        </a>
       </div>
     </div>
-  </nav>
+  </div>
+</nav>

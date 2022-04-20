@@ -1,0 +1,35 @@
+<div *ngIf="!hasAccess then login else member"></div>
+<ng-template #login>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="text-center">
+                        <h1>Login</h1>
+                        <h6>Please enter email and password</h6>
+                    </div>
+                    <form #f="ngForm">
+                        <div class="mb-3">
+                            <label class="form-label"> Email address</label>
+                            <input type="email" class="form-control" required minlength="1" ngModel name="email"
+                                #email="ngModel">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label"> Password</label>
+                            <input type="password" class="form-control" required minlength="1" ngModel name="password"
+                                #password="ngModel">
+                        </div>
+                        <button type="submit" class="btn btn-primary" (click)="onLogin(f.value)" [disabled]="!f.valid">
+                            Login </button>
+                    </form>
+                </div>
+                <h5> {{message}} </h5>
+            </div>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #member>
+    <p> on member can see this line *****</p>
+    <button (click)="onLogout()" class="btn btn-primary">Logout </button>
+</ng-template>

@@ -16,6 +16,13 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { ToastrModule } from 'ngx-toastr';
 import {MatIconModule} from '@angular/material/icon';
 import { RatingComponent } from './rating/rating.component';
+import { AdminModule } from './admin/admin.module';
+import { environment } from 'src/environments/environment';
+
+import {AngularFireModule} from '@angular/fire/compat'
+import {AngularFireStorageModule} from '@angular/fire/compat/storage'
+import {AngularFirestoreModule} from '@angular/fire/compat/firestore'
+import {AngularFireDatabaseModule} from '@angular/fire/compat/database'
 
 @NgModule({
   declarations: [
@@ -38,6 +45,12 @@ import { RatingComponent } from './rating/rating.component';
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     MatIconModule,
+    AdminModule,
+    AngularFireModule,
+    AngularFireStorageModule,
+    AngularFirestoreModule,
+    AngularFireDatabaseModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
   ],
   providers: [],
   bootstrap: [AppComponent]

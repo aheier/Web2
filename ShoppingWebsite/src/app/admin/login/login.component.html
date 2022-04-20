@@ -1,0 +1,54 @@
+<!-- <h4>{{isLoggedIn()}}</h4> -->
+<div class="cust-bg-lightgrey min-height">
+    <div class="container">
+        <div class="row">
+        <div *ngIf="isLoggedIn() then loggedinTemplate else loginTemplate"></div>
+        <ng-template #loginTemplate>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="text-center">
+                        <h1>Login</h1>
+                        <h6>Please enter email and password</h6>
+                    </div>
+                    <form #loginForm="ngForm">
+                        <div class="mb-3">
+                            <label class="form-label"> Email address</label>
+                            <input type="email" class="form-control" name="email" ngModel #email="ngModel">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label"> Password</label>
+                            <input type="password" class="form-control" name="pass" ngModel #pass="ngModel">
+                        </div>
+                        <button type="submit" class="btn btn-primary" (click)="login(loginForm.value)"> Login </button>
+                    </form>
+                </div>
+            </div>
+        </ng-template>
+        <ng-template #loggedinTemplate>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="text-center">
+                        <h1>Welcome to the Admin Pannel</h1>
+                    </div>
+                    <div class="row">
+                        <div class="col text-center">
+                            <button class="btn btn-primary" routerLink="/admin/product">
+                                Manage Products
+                            </button>
+                        </div>
+                        <div class="col text-center">
+                            <button class="btn btn-primary" routerLink="/admin/orders">
+                                View Orders
+                            </button>
+                        </div>
+                        <div class="col text-center">
+                            <button class="btn btn-primary" (click)="logout()">
+                                Logout
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+    </div>
+</div>

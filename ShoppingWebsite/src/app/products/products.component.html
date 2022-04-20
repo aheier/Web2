@@ -12,27 +12,27 @@
                     (click)="changeSize(-1)"><mat-icon class="align-middle">remove_circle_outline</mat-icon></button>
             </div>
         </div>
-        <div class="row" *ngIf="filteredProducts.length == 0">
+        <!-- <div class="row" *ngIf="filteredProducts.length == 0">
             <div class="col">
                 <h3 class="text-warning text-center">Your search does not match any products</h3>
             </div>
-        </div>
+        </div> -->
         <div class="row clearfix">
-            <div class="col-md-{{size}} col-sm-6" *ngFor="let product of filteredProducts; let i = index;">
+            <div class="col-md-{{size}} col-sm-6" *ngFor="let product of filteredProducts | async; let i = index;">
                 <div class="card">
-                    <img class="card-img-top product-img" [src]="product.getImagePath()">
+                    <!-- <img class="card-img-top product-img" [src]="product.imagePath">
                     <div class="card-body">
-                        <h5 class="card-title text-truncate" [title]="product.getName()">{{product.getName()}}</h5>
-                        <p class="card-text m-0 desc"> {{product.getDescription()}}</p>
-                        <span class="card-text"> Price : {{product.getPrice() | currency}} </span>
-                    </div>
-                    <button #btn class="btn btn-sm btn-primary float-end"
+                        <h5 class="card-title text-truncate" [title]="product.key">{{product.key}}</h5>
+                        <p class="card-text m-0 desc"> {{product}}</p>
+                        <span class="card-text"> Price : {{product.price | currency}} </span>
+                    </div> -->
+                    <!-- <button #btn class="btn btn-sm btn-primary float-end"
                     [ngClass]="isInCart(product) ? 'btn-success' : 'btn-primary'"
                     [disabled]="isInCart(product)"
                         (click)="addProductToCart(product); btn.value='Added'">
                         {{ isInCart(product) ? "Added" : "Add to Cart"}} </button>
                     <app-rating class="px-1 text-center" [initialRating]="product.getRating()"
-                        (ratingEmitter)="product.setRating($event)"></app-rating>
+                        (ratingEmitter)="product.setRating($event)"></app-rating> -->
                 </div>
                 <br>
             </div>
