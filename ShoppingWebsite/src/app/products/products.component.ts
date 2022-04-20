@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { map, Observable } from 'rxjs';
 import { CartService } from '../cart.service';
-import { Product } from '../product';
+import Product from '../product';
 import { ProductsService } from '../products.service';
 
 @Component({
@@ -14,8 +14,8 @@ import { ProductsService } from '../products.service';
 })
 export class ProductsComponent implements OnInit {
   size:number = 3;
-  products:Observable<any> | undefined;
-  filteredProducts:Observable<any> | undefined ;
+  products?:Product[];
+  filteredProducts?:Product[];
   query="";
 
   constructor(private productService:ProductsService, private cartService:CartService,
@@ -23,7 +23,14 @@ export class ProductsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.products = this.productService.products;
+    this.productService.getAll().snapshotChanges().pipe(
+      map(changes => changes.map( c => 
+        ({ key: c.payload.key, ...c.payload.val() })
+        )
+      )
+    ).subscribe(data => {
+      this.products?.push(data);
+    });
     this.activatedRoute.queryParams.subscribe(params =>{
       this.query = params['search'];
       // console.log(this.query)
@@ -56,9 +63,9 @@ export class ProductsComponent implements OnInit {
   addProductToCart(product:Product){
     if(!this.isInCart(product)){
       this.cartService.addProductIntoCart(product)
-      this.toastr.success(product.getName() + " added to cart.", "Item Added",{
-        timeOut:2000
-      })
+      // this.toastr.success(product.getName() + " added to cart.", "Item Added",{
+      //   timeOut:2000
+      // })
     }
   }
   filterProducts(search:string){

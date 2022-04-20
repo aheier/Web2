@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/compat/database';
 import { map, Observable } from 'rxjs';
-import { Product } from './product';
+import Product from './product';
+// https://www.bezkoder.com/angular-12-firebase-crud/
 
 export interface IProduct{
   id:number,
@@ -17,42 +18,62 @@ export interface IProduct{
 })
 export class ProductsService {
 
-  products:Observable<any[]> | undefined
-  productsRef:AngularFireList<any>
-  constructor(private db:AngularFireDatabase) { 
-    this.productsRef = this.db.list('/products')
-    this.add(new Product(17, "Shoe4", 10.34, "lorum ipsum dolor ", '/assets/images/shoe4.jpg', 4))
-    this.products = this.productsRef.snapshotChanges().pipe(
-      map(changes => 
-      changes.map(c => ({key: c.payload.key, ...c.payload.val() }))
-      )
-    );
+  private dbPath = '/products';
+  productsRef: AngularFireList<Product>;
+  constructor(private db: AngularFireDatabase) {
+    this.productsRef = db.list(this.dbPath);
   }
+  getAll(): AngularFireList<Product> {
+    return this.productsRef;
+  }
+  create(tutorial: Product): any {
+    return this.productsRef.push(tutorial);
+  }
+  update(key: string, value: any): Promise<void> {
+    return this.productsRef.update(key, value);
+  }
+  delete(key: string): Promise<void> {
+    return this.productsRef.remove(key);
+  }
+  deleteAll(): Promise<void> {
+    return this.productsRef.remove();
+  }
+  // products:Observable<any[]> | undefined
+  // productsRef:AngularFireList<any>
+  // constructor(private db:AngularFireDatabase) { 
+  //   this.productsRef = this.db.list('/products')
+  //   this.add(new Product(17, "Shoe4", 10.34, "lorum ipsum dolor ", '/assets/images/shoe4.jpg', 4))
+  //   this.products = this.productsRef.snapshotChanges().pipe(
+  //     map(changes => 
+  //     changes.map(c => ({key: c.payload.key, ...c.payload.val() }))
+  //     )
+  //   );
+  // }
 
-  getProducts(){
-    // this.init()
-    // this.productsFetch = this.db.list('/products')
-    // this.products = this.productsFetch.snapshotChanges().pipe(
-    //   map((changes: any[]) => {
-    //     changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
-    //   })
-    // );
-    // return this.products;
-  }
-  add(prod:Product){
-    this.productsRef.push({
-      id: prod.getId(),
-      name: prod.getName(),
-      description: prod.getDescription(),
-      price: prod.getPrice(),
-      imagePath: prod.getImagePath(),
-      rating: prod.getRating()
-    })
-  }
-  remove(id:string){
-    const dbRef = this.db.list('/product')
-    dbRef.remove(id);
-  }
+  // getProducts(){
+  //   this.init()
+  //   this.productsFetch = this.db.list('/products')
+  //   this.products = this.productsFetch.snapshotChanges().pipe(
+  //     map((changes: any[]) => {
+  //       changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
+  //     })
+  //   );
+  //   return this.products;
+  // }
+  // add(prod:Product){
+  //   this.productsRef.push({
+  //     id: prod.getId(),
+  //     name: prod.getName(),
+  //     description: prod.getDescription(),
+  //     price: prod.getPrice(),
+  //     imagePath: prod.getImagePath(),
+  //     rating: prod.getRating()
+  //   })
+  // }
+  // remove(id:string){
+  //   const dbRef = this.db.list('/product')
+  //   dbRef.remove(id);
+  // }
 
   init(){
     let products = [];
