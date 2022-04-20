@@ -18,8 +18,9 @@
             </div>
         </div> -->
         <div class="row clearfix">
-            <div class="col-md-{{size}} col-sm-6" *ngFor="let product of filteredProducts | async; let i = index;">
+            <div class="col-md-{{size}} col-sm-6" *ngFor="let product of products; let i = index;">
                 <div class="card">
+                    <p> {{i}} </p>
                     <!-- <img class="card-img-top product-img" [src]="product.imagePath">
                     <div class="card-body">
                         <h5 class="card-title text-truncate" [title]="product.key">{{product.key}}</h5>
