@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFireDatabase, AngularFireList } from '@angular/fire/compat/database';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { map, Observable } from 'rxjs';
@@ -14,34 +13,31 @@ import { ProductsService } from '../products.service';
 })
 export class ProductsComponent implements OnInit {
   size: number = 3;
-  products?: Product[];
-  filteredProducts?: Product[];
+  products: Observable<any[]>;
+  filteredProducts: Product[] = [];
   query = "";
 
   constructor(private productService: ProductsService, private cartService: CartService,
-    private activatedRoute: ActivatedRoute, private toastr: ToastrService, private db: AngularFireDatabase) {
-      this.productService.getAll().valueChanges()
-      .subscribe(data => {
-        this.products = data;
-      });
-    console.log(this.products)
+    private activatedRoute: ActivatedRoute, private toastr: ToastrService,) {
+    this.products = this.productService.getAll().snapshotChanges().pipe(
+      map(changes =>
+        changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
+      )
+    );
+    this.products.subscribe(x => this.filteredProducts = x)
   }
 
   ngOnInit(): void {
-    // this.productService.create(new Product(17, "Shoe4", 10.34, "lorum ipsum dolor ", '/assets/images/shoe4.jpg', 4))
-    this.activatedRoute.queryParams.subscribe(params =>{
+    this.activatedRoute.queryParams.subscribe(params => {
       this.query = params['search'];
-      // console.log(this.query)
-      if(this.query == "" || this.query == null){
-        this.filteredProducts = this.products;
+      if (this.query == "" || this.query == null) {
+        this.products.subscribe(x => this.filteredProducts = x);
         return;
       }
       this.filterProducts(this.query);
     });
   }
   changeSize(n: number) {
-    console.log(this.products)
-    console.log(this.filteredProducts)
     this.size += n;
     if (this.size > 6) {
       this.size = 6;
@@ -62,18 +58,26 @@ export class ProductsComponent implements OnInit {
   addProductToCart(product: Product) {
     if (!this.isInCart(product)) {
       this.cartService.addProductIntoCart(product)
-      this.toastr.success(product.getName() + " added to cart.", "Item Added",{
-        timeOut:2000
+      this.toastr.success(product.name + " added to cart.", "Item Added", {
+        timeOut: 2000
       })
     }
   }
   filterProducts(search: string) {
-    // this.filteredProducts;
-    // this.products.forEach(element => {
-    //   if(element.getName().toLocaleLowerCase().match(search.toLowerCase())){
-    //     this.filteredProducts.push(element);
-    //   }
-    // });
-
+    this.products = this.productService.search(search).snapshotChanges().pipe(
+      map(changes =>
+        changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
+      )
+    );
+    this.products.subscribe(x => this.filteredProducts = x)
+  }
+  setRating(product: any, value: any) {
+    // product.rating = value;
+    console.log(product.key + ' ' + value + " " + product.rating)
+    this.productService.update(product.key, {rating:value}).then((success)=>{
+      this.toastr.success("Rating Updated")
+    }, (error) => {
+      this.toastr.warning(error, "Rating not updated")
+    }).catch((reason) => console.error(reason))
   }
 }

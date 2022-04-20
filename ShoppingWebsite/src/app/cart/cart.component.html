@@ -3,39 +3,39 @@
       <div class="row d-flex justify-content-center align-items-center h-100">
         <div class="col-10">
   
-          <div class="d-flex justify-content-between align-items-center mb-4" *ngIf="this.cartItems.length != 0">
+          <div class="d-flex justify-content-between align-items-center mb-4" *ngIf="(this.cartItems|async)?.length != 0">
             <h3 class="fw-normal mb-0 text-black">
-              Your Cart ({{this.cartItems.length}} Item{{this.cartItems.length >1 ? "s)":")"}}</h3>
+              Your Cart ({{(this.cartItems|async)?.length}} Item{{(this.cartItems|async)?.length! >1 ? "s)":")"}}</h3>
           </div>
           
-          <div class="mb-4 text-center" *ngIf="this.cartItems.length == 0">
+          <div class="mb-4 text-center" *ngIf="(this.cartItems|async)?.length == 0">
             <h3 class="fw-normal mb-0 text-black">
-              No Items in cart. Head back to <a routerLink="/product">product</a> page.</h3>
+              No Items in cart. Head back to <a routerLink="/products">product</a> page.</h3>
           </div>
   
-          <div class="card rounded-3 mb-4" *ngFor="let item of cartItems">
+          <div class="card rounded-3 mb-4" *ngFor="let item of cartItems | async">
             <div class="card-body p-4">
               <div class="row d-flex justify-content-between align-items-center">
                 <div class="col-3">
-                  <img [src]="item.getImagePath()"
+                  <img [src]="item.imagePath"
                     class="img-fluid rounded-3 cart-img" alt="Cotton T-shirt">
                 </div>
                 <div class="col-3">
-                  <p class="lead fw-normal mb-2">{{item.getName()}}</p>
-                  <p>{{item.getDescription()}}</p>
+                  <p class="lead fw-normal mb-2">{{item.name}}</p>
+                  <p>{{item.description}}</p>
                 </div>
 
                 <div class="col-3">
-                  <p> Price: {{item.getPrice() | currency}}</p>
+                  <p> Price: {{item.price | currency}}</p>
                 </div>
                 <div class="col-3 text-end">
-                  <button class="btn btn-danger" (click)="removeItem(item)">Remove Item </button>
+                  <button class="btn btn-danger" (click)="removeItem(item.key)">Remove Item </button>
                 </div>
               </div>
             </div>
           </div>
 
-          <div class="card" *ngIf="this.cartItems.length != 0">
+          <div class="card" *ngIf="(this.cartItems|async)?.length != 0">
             <div class="card-body">
               <div class="row">
                 <div class="col-8">

@@ -1,6 +1,6 @@
 
 export class Product {
-    constructor(private id:number,
+    constructor(public id:number,
         public name:string,
         public price:number,
         public description:string,
@@ -16,7 +16,7 @@ export class Product {
     getPrice(){ return this.price }
     getImagePath(){ return this.imagePath }
     getRating():number { return this.rating }
-    setRating(n:number){ 
+    setRating(n:number):void{ 
         this.rating = n
     }
 }
