@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { map, Observable } from 'rxjs';
+import { filter, map, Observable } from 'rxjs';
 import { CartService } from '../cart.service';
 import { Product } from '../product';
 import { ProductsService } from '../products.service';
@@ -31,6 +31,11 @@ export class ProductsComponent implements OnInit {
     this.activatedRoute.queryParams.subscribe(params => {
       this.query = params['search'];
       if (this.query == "" || this.query == null) {
+        this.products = this.productService.getAll().snapshotChanges().pipe(
+          map(changes =>
+            changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
+          )
+        );
         this.products.subscribe(x => this.filteredProducts = x);
         return;
       }
@@ -64,17 +69,19 @@ export class ProductsComponent implements OnInit {
     }
   }
   filterProducts(search: string) {
-    this.products = this.productService.search(search).snapshotChanges().pipe(
-      map(changes =>
-        changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
-      )
-    );
+    this.products = this.productService.search(search).snapshotChanges()
+      .pipe(
+        map(changes =>
+          changes.map(c => ({ key: c.payload.key, ...c.payload.val() })
+          )
+        ))
+    // .filter(item => item['name'].toLowerCase() == search.toLowerCase()))
     this.products.subscribe(x => this.filteredProducts = x)
   }
   setRating(product: any, value: any) {
     // product.rating = value;
-    console.log(product.key + ' ' + value + " " + product.rating)
-    this.productService.update(product.key, {rating:value}).then((success)=>{
+    // console.log(product.key + ' ' + value + " " + product.rating)
+    this.productService.update(product.key, { rating: value }).then((success) => {
       this.toastr.success("Rating Updated")
     }, (error) => {
       this.toastr.warning(error, "Rating not updated")

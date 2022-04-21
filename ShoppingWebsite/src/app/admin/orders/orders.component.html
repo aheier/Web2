@@ -1,1 +1,31 @@
-<p>orders works!</p>
+<div class="cust-bg-lightgrey min-height">
+    <div class="container">
+        <div class="table-responsive p-4">
+            <h2 class="text-center">Placed Orders </h2>
+            <table class="table">
+                <thead class="table-light">
+                    <th>Order Id</th>
+                    <th>Order Date</th>
+                    <th>Customer Name</th>
+                    <th>Customer State</th>
+                    <th>Products</th>
+                    <th>Total</th>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let order of getOrders() | async">
+                        <td> {{order.key}} </td>
+                        <td> {{order.orderDate}} </td>
+                        <td> {{order.shipping.firstName + ' ' + order.shipping.lastName}} </td>
+                        <td> {{order.shipping.cityState}} </td>
+                        <td>
+                            <span *ngFor="let item of order.items; let i = index">
+                                {{item.name + " "}}
+                            </span>
+                        </td>
+                        <td> {{order.total}} </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

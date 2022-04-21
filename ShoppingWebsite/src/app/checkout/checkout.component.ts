@@ -6,6 +6,7 @@ import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.compone
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { delay } from 'rxjs';
+import { OrdersService } from '../orders.service';
 
 @Component({
   selector: 'app-checkout',
@@ -21,7 +22,7 @@ export class CheckoutComponent implements OnInit {
   isUseShipping: boolean = false;
 
   constructor(private cartService: CartService, public dialog: MatDialog,
-    private router:Router, private toastr:ToastrService) {
+    private router:Router, private toastr:ToastrService, private orderService:OrdersService) {
       this.zipToCity.set("55987", "Winona, MN")
       this.zipToCity.set("55988", "Stockton, MN")
       this.zipToCity.set("55990", "Wykoff, MN")
@@ -61,9 +62,20 @@ export class CheckoutComponent implements OnInit {
       console.log(typeof(result))
       if(result)
       {
-        console.log(shippingForm.form.value)
-        console.log(billingForm.form.value)
-        console.log(ccForm.form.value)
+        // console.log(shippingForm.form.value)
+        // console.log(billingForm.form.value)
+        // console.log(ccForm.form.value)
+        let obj = {
+          "shipping":shippingForm.form.value,
+          // "billing":billingForm.form.value,
+          // "creditCard":ccForm.form.value,
+          "items": this.cartService.cartProductsList,
+          "orderDate": new Date().toDateString(),
+          "total": this.getTotalPrice()
+        }
+        console.log(obj)
+        this.orderService.create(obj);
+
         let s = ""
         for(let item of this.cartService.getCartProducts()){
           s += item.name + ', ';

@@ -7,9 +7,9 @@ export class Product {
         public imagePath:string,
         public rating:number){
         }
-    private isInCart:boolean = false;
-    setCart(val:boolean){ this.isInCart = val}
-    inCart(){ return this.isInCart}
+    // private isInCart:boolean = false;
+    // setCart(val:boolean){ this.isInCart = val}
+    // inCart(){ return this.isInCart}
     getId(){ return this.id }
     getName(){ return this.name }
     getDescription(){ return this.description }

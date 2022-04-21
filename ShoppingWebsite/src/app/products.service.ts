@@ -31,8 +31,8 @@ export class ProductsService {
   search(search:string): AngularFireList<Product> {
     return this.db.list(this.dbPath, ref => ref.orderByChild('name').equalTo(search));
   }
-  create(tutorial: Product): any {
-    return this.productsRef.push(tutorial);
+  create(prod: Product): any {
+    return this.productsRef.push(prod);
   }
   update(key: string, value: any): Promise<void> {
     return this.productsRef.update(key, value);

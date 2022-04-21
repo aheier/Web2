@@ -1,1 +1,83 @@
-<p>product-management works!</p>
+<div class="cust-bg-lightgrey min-height">
+
+    <div class="container p-4">
+
+        <h1 class="text-center">Add Product</h1>
+
+        <div class="row">
+            <div class="col-6 mx-auto">
+                <form #productForm="ngForm" ngForm>
+
+                    <div class="form-floating mb-1">
+                        <input type="number" ngModel name="id" #id="ngModel" class="form-control"
+                            placeholder="Product Id" required pattern="[0-9]+">
+                        <label>Product Id</label>
+                    </div>
+                    <div class="alert alert-danger p-1" *ngIf="id.touched && !id.valid">
+                        <div *ngIf="id.errors">
+                            Product Id is required and is a number.
+                        </div>
+                    </div>
+
+                    <div class="form-floating mb-1">
+                        <input type="text" ngModel name="name" #name="ngModel" class="form-control"
+                            placeholder="Product Name" required minlength="3">
+                        <label>Product Name</label>
+                    </div>
+                    <div class="alert alert-danger p-1" *ngIf="name.touched && !name.valid">
+                        <div *ngIf="name.errors">
+                            Product Name is required and must be 3 characters long.
+                        </div>
+                    </div>
+
+                    <div class="form-floating mb-1">
+                        <input type="text" ngModel name="imagePath" #imageUrl="ngModel" class="form-control"
+                            placeholder="Product Image Url" required minlength="3">
+                        <label>Product Image Url (1:1 aspect ratio)</label>
+                    </div>
+                    <div class="alert alert-danger p-1" *ngIf="imageUrl.touched && !imageUrl.valid">
+                        <div *ngIf="imageUrl.errors">
+                            Product Image Url/Name is required.
+                        </div>
+                    </div>
+
+                    <div class="form-floating mb-1">
+                        <input type="number" ngModel name="price" #price="ngModel" class="form-control"
+                            placeholder="Product Price" required pattern="(\d+\.\d{1,2})">
+                        <label>Product Price</label>
+                    </div>
+                    <div class="alert alert-danger p-1" *ngIf="price.touched && !price.valid">
+                        <div *ngIf="price.errors">
+                            Product Price is required and must be a number. [0-9 and .]
+                        </div>
+                    </div>
+                    
+                    <div class="form-floating mb-1">
+                        <input type="number" ngModel name="rating" #rating="ngModel" class="form-control"
+                            placeholder="Product Rating" required pattern="[0-5]">
+                        <label>Product Rating</label>
+                    </div>
+                    <div class="alert alert-danger p-1" *ngIf="rating.touched && !rating.valid">
+                        <div *ngIf="rating.errors">
+                            Product Rating is required and must be a number between 0 and 5.
+                        </div>
+                    </div>
+                    
+                    <div class="form-floating mb-1">
+                        <input type="text" ngModel name="description" #description="ngModel" class="form-control"
+                            placeholder="Product Description" required >
+                        <label>Product Description</label>
+                    </div>
+                    <div class="alert alert-danger p-1" *ngIf="description.touched && !description.valid">
+                        <div *ngIf="description.errors">
+                            Product Description is required.
+                        </div>
+                    </div>
+                </form>
+                <button class="btn btn-primary w-100" [disabled]="productForm.invalid" 
+                (click)="onSubmit(productForm)">
+                     Add Product </button>
+            </div>
+        </div>
+    </div>
+</div>
