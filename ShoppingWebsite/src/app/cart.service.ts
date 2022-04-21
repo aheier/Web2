@@ -5,16 +5,26 @@ import { map, Observable } from 'rxjs';
 import { Cart } from './cart';
 import { Product } from './product';
 
+export class CartItem{
+    constructor(public id:number,
+    public name:string,
+    public price:number,
+    public imagePath:string,
+    public qty?:number){
+        this.qty=1
+    }
+}
+
 @Injectable({
     providedIn: 'root'
 })
 export class CartService {
     private totalPrice;
     private cartProducts: Observable<any[]>;;
-    public cartProductsList: Product[] = [];
+    public cartProductsList: CartItem[] = [];
     private dbPath = '/cart';
     user = "default"
-    cartRef: AngularFireList<Product>;
+    cartRef: AngularFireList<CartItem>;
     constructor(private cookie: CookieService, private db: AngularFireDatabase) {
         if (cookie.check('userId')) {
             // this.user = cookie.get('userId')
@@ -27,6 +37,7 @@ export class CartService {
             )
         );
         this.cartProducts.subscribe(x => this.cartProductsList = x)
+        // this.cartProducts.unsubscribe();
     }
 
     getCartProducts() {
@@ -44,75 +55,34 @@ export class CartService {
         })
         return this.totalPrice;
     }
-    addProductIntoCart(newProduct: Product) {
-        this.create(newProduct);
+    addProductIntoCart(prod: Product) {
+        this.create(new CartItem(prod.id, prod.name, prod.price, prod.imagePath));
     }
     removeProductFromCart(removeProduct: any) {
         if (this.cartProductsList.length == 0) return;
-
-        this.cartProductsList.forEach((product, index) => {
-            if (removeProduct.id == product.id) {
-                let removed = this.cartProductsList?.splice(index, 1)
-            }
-        });
         this.delete(removeProduct.key)
     }
-    isProductInCart(newProduct: Product): boolean {
+    isProductInCart(newProduct: any): boolean {
         if (this.cartProductsList.length == 0) return false;
         let hasProduct = false
-        this.cartProductsList?.forEach((product) => {
-            if (newProduct.id == product.id) {
+        this.cartProductsList?.forEach((item) => {
+            if (newProduct.id == item.id) {
                 hasProduct = true;
             }
         });
         return hasProduct;
     }
-    resetCart():Promise<void> {
+    resetCart(): Promise<void> {
         this.cartProductsList = [];
         return this.cartRef.remove();
     }
 
-    
-    create(tutorial: Product): any {
-        return this.cartRef.push(tutorial);
+
+    create(item: CartItem): any {
+        return this.cartRef.push(item);
     }
     delete(key: string): Promise<void> {
         return this.cartRef.remove(key);
     }
 
-    // getCartProducts() { return this.cartProducts }
-
-    // getTotalPrice() {
-    //     if (this.cartProducts.length == 0) return 0;
-    //     this.totalPrice = 0;
-    //     this.cartProducts.forEach((product) => {
-    //         this.totalPrice += product.price;
-    //     })
-    //     return this.totalPrice;
-    // }
-
-    // addProductIntoCart(newProduct: Product) {
-    //     this.cartProducts.forEach((product) => {
-    //         if (newProduct.id == product.id) {
-    //             return;
-    //         }
-    //     })
-    //     this.cartProducts?.push(newProduct);
-    // }
-
-    // removeProductFromCart(removeProduct: Product) {
-    //     if (this.cartProducts.length == 0) return;
-
-    //     this.cartProducts.forEach((product, index) => {
-    //         if (removeProduct.id == product.id) {
-    //             let removed = this.cartProducts?.splice(index, 1)
-    //         }
-    //     });
-    // }
-
-    // isProductInCart(newProduct: Product) {
-    // }
-    // resetCart(): void {
-    //     this.cartProducts = [];
-    // }
 }

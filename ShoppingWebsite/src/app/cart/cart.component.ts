@@ -19,7 +19,7 @@ export class CartComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  removeItem(item:Product){
+  removeItem(item:any){
     this.cart.removeProductFromCart(item);
     this.toastr.success(item.name + " removed from cart.", "Item Removed",{
       timeOut:2000

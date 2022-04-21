@@ -66,7 +66,7 @@ export class CheckoutComponent implements OnInit {
         console.log(ccForm.form.value)
         let s = ""
         for(let item of this.cartService.getCartProducts()){
-          s += item.getName() + ', ';
+          s += item.name + ', ';
         }
         this.toastr.success(this.cartService.getCartProducts().length + " items ordered from cart:\n" + s,
          "Items Ordered",{

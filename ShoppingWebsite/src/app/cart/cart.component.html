@@ -23,13 +23,14 @@
                 <div class="col-3">
                   <p class="lead fw-normal mb-2">{{item.name}}</p>
                   <p>{{item.description}}</p>
+                  <p>{{item | json}}</p>
                 </div>
 
                 <div class="col-3">
                   <p> Price: {{item.price | currency}}</p>
                 </div>
                 <div class="col-3 text-end">
-                  <button class="btn btn-danger" (click)="removeItem(item.key)">Remove Item </button>
+                  <button class="btn btn-danger" [title]="item.key" (click)="removeItem(item)">Remove Item </button>
                 </div>
               </div>
             </div>
