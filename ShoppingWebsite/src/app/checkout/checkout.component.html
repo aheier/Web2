@@ -5,7 +5,7 @@
         <h1 class="text-center">Shoe Supply Checkout</h1>
         <div class="mb-4 text-center" *ngIf="getTotalPrice() == 0">
             <h3 class="fw-normal mb-0 text-black">
-                No Items in cart. Head back to <a routerLink="/product">product</a> page.</h3>
+                No Items in cart. Head back to <a routerLink="/products">product</a> page.</h3>
         </div>
         <div class="row">
             <div class="col-6">
@@ -36,8 +36,8 @@
                     </div>
 
                     <div class="form-floating mb-1">
-                        <input type="text" ngModel name="streetAddress" #shippingStreetAddr="ngModel"
-                            class="form-control" placeholder="Street Address" required>
+                        <input type="street" ngModel name="streetAddress" #shippingStreetAddr="ngModel"
+                            class="form-control" placeholder="Street Address" required autocomplete="street-address">
                         <label>Street Address</label>
                     </div>
                     <div class="alert alert-danger p-1" *ngIf="shippingStreetAddr.touched && !shippingStreetAddr.valid">
@@ -56,14 +56,15 @@
                         <div class="col-6">
                             <div class="form-floating mb-1">
                                 <input type="text" ngModel name="zip" #shippingZip="ngModel" class="form-control"
-                                    required placeholder="Zip Code" (keyup)="preloadZip(shippingZip.value, true)">
+                                    required placeholder="Zip Code" (keyup)="preloadZip(shippingZip.value, true)"
+                                    autocomplete="postal-code">
                                 <label>Zip Code</label>
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="form-floating mb-1">
                                 <select class="form-select form-select-md" name="cityState" #shippingCityState="ngModel"
-                                    ngModel required placeholder="City, State" [(ngModel)]="shipCityState" >
+                                    ngModel required placeholder="City, State" [(ngModel)]="shipCityState">
                                     <option value="" disabled selected>City, State</option>
                                     <option value="Winona, MN">Winona, MN</option>
                                     <option value="Milwaukee, WI">Milwaukee, WI</option>
@@ -74,7 +75,7 @@
                             </div>
                         </div>
                         <div class="form-floating mb-1">
-                            <select class="form-select form-select-md" name="countryRegion"
+                            <select class="form-select form-select-md" name="countryRegion" autocomplete="country"
                                 #shippingCountryRegion="ngModel" ngModel required placeholder="Country/Region">
                                 <option value="" disabled selected>City, State</option>
                                 <option value="US">United States</option>
@@ -258,7 +259,7 @@
         <div class="center">
             <div class="text-center clearfix m-0" *ngIf="getTotalPrice() == 0; else hasItems">
                 <h5 class="fw-normal p-1 text-black float-start">
-                    No Items in cart. Head back to <a routerLink="/product">product</a> page.
+                    No Items in cart. Head back to <a routerLink="/products">product</a> page.
                 </h5>
             </div>
             <ng-template #hasItems>

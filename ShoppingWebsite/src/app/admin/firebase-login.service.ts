@@ -31,8 +31,8 @@ export class FirebaseLoginService  {
     if (this.isLoggedIn) {
       this.hasAccess = true;
 
-      this.cookie.set("userId", email, 1);
-      this.cookie.set("userType", "Admin", 1);
+      this.cookie.set("userId", email);
+      this.cookie.set("userType", "Admin");
     }
     this.cartService.init()
   }
@@ -59,5 +59,6 @@ export class FirebaseLoginService  {
     this.cookie.delete("userId");
     this.cookie.delete("userType");
     this.cartService.init()
+    console.log(this.cookie.get('userType'))
   }
 }

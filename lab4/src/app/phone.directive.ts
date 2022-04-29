@@ -14,6 +14,7 @@ export class PhoneDirective {
   @HostListener('blur')
   onBlur(){
     let value = this.el.nativeElement.value;
+    console.log(value)
     this.el.nativeElement.value = this.formatPhoneNumber(value);
   }
   formatPhoneNumber(phoneNumberString:string) {
