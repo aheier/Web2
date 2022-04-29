@@ -69,15 +69,20 @@ export class ProductsComponent implements OnInit {
     }
   }
   filterProducts(search: string) {
-    this.products = this.productService.search(search).snapshotChanges()
-      .pipe(
-        map(changes =>
-          changes.map(c => ({ key: c.payload.key, ...c.payload.val() })
-          )
-        ))
-    // .filter(item => item['name'].toLowerCase() == search.toLowerCase()))
-    this.products.subscribe(x => this.filteredProducts = x)
+    this.products = this.productService.getAll().snapshotChanges().pipe(
+      map(changes =>{
+        changes = changes.filter(p => {
+          if(p.payload.val()?.name.toLowerCase().includes(search.toLowerCase()) ||
+                p.payload.val()?.description.toLocaleLowerCase().includes(search.toLowerCase())){
+                  return true;
+          }
+          return false;
+        })
+        return changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
+      })
+    );
   }
+
   setRating(product: any, value: any) {
     // product.rating = value;
     // console.log(product.key + ' ' + value + " " + product.rating)
